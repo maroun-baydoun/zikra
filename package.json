@@ -9,12 +9,14 @@
     "start": "cd src && http-server",
     "format": "prettier --write .",
     "fetch-images": "node ./scripts/fetch-images.js",
-    "generate-image-ids": "node ./scripts/generate-image-ids.js"
+    "generate-image-ids": "node ./scripts/generate-image-ids.js",
+    "publish-page": "node ./scripts/publish-page.js"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "dotenv": "16.0.1",
+    "gh-pages": "4.0.0",
     "http-server": "14.1.0",
     "node-fetch": "3.2.4",
     "prettier": "2.6.2"
