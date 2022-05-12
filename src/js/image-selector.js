@@ -6,7 +6,7 @@ export const displayImages = (imageSelector) => {
     button.dataset.imageId = imageId;
 
     const image = document.createElement("img");
-    image.src = `/img/${imageId}/medium.jpg`;
+    image.src = `img/${imageId}/medium.jpg`;
 
     button.appendChild(image);
     imageSelector.appendChild(button);
