@@ -1,0 +1,22 @@
+{
+  "name": "zikra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "cd src && http-server",
+    "format": "prettier --write .",
+    "fetch-images": "node ./scripts/fetch-images.js",
+    "generate-image-ids": "node ./scripts/generate-image-ids.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "dotenv": "16.0.1",
+    "http-server": "14.1.0",
+    "node-fetch": "3.2.4",
+    "prettier": "2.6.2"
+  }
+}
