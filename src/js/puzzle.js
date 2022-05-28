@@ -82,7 +82,7 @@ export const displayPuzzle =
             finalPositionY:
               secondSelectedPieceStyle.getPropertyValue("--position-y"),
           },
-          { delay: 0, duration: 500 }
+          { delay: 0, duration: 300 }
         );
 
         movePiece(resetPiecePositionXY)(
@@ -97,7 +97,7 @@ export const displayPuzzle =
             finalPositionY:
               firstSelectedPieceStyle.getPropertyValue("--position-y"),
           },
-          { delay: 0, duration: 500 }
+          { delay: 0, duration: 300 }
         );
 
         firstSelectedPiece.dataset.currentOrder =
