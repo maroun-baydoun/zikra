@@ -6,7 +6,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "cd src && http-server",
+    "start": "cd src && http-server --proxy http://localhost:8080?",
     "format": "prettier --write .",
     "fetch-images": "node ./scripts/fetch-images.js",
     "generate-image-ids": "node ./scripts/generate-image-ids.js",

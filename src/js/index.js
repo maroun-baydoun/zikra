@@ -5,6 +5,7 @@ import {
 } from "./image-selector.js";
 
 import { displayPuzzle } from "./puzzle.js";
+import { goTo } from "./router.js";
 
 window.addEventListener("DOMContentLoaded", () => {
   const imageSelector = document.querySelector(".image-selector");
@@ -13,6 +14,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
   displayImages(imageSelector);
   onImageSelected(imageSelector)((imageId) => {
+    goTo(`/image/${imageId}`);
+
     hideImageSelector(imageSelector);
 
     displayPuzzle(container, imageContainer)(() => {})(imageId);
