@@ -25,27 +25,105 @@ const parseResponse = (response) => {
   }));
 };
 
+const done = (total) => {
+  let accumulator = 0;
+  return (callback) => () => {
+    accumulator++;
+    if (accumulator === total) {
+      callback();
+    }
+  };
+};
+
 const downloadImages = (parsedResponse) => {
   const imagesDirectoryPath = path.resolve("src", "img");
 
-  parsedResponse.forEach((photo) => {
-    const imageDirectoryPath = path.join(imagesDirectoryPath, photo.id);
-
-    fs.mkdir(imageDirectoryPath, { recursive: true }, (error) => {
+  const onDone = done(parseResponse.length)(() =>
+    fs.readdir(imagesDirectoryPath, (error, existingPhotoIds) => {
       if (error) {
         throw error;
       }
 
-      fetch(photo.urlLarge).then((response) => {
-        const largeImageFilePath = path.join(imageDirectoryPath, "large.jpg");
-        return writeResponseToFile(response, largeImageFilePath);
-      });
+      const responsePhotoIds = parsedResponse.map((photo) => photo.id);
 
-      fetch(photo.urlMedium).then((response) => {
-        const mediumImageFilePath = path.join(imageDirectoryPath, "medium.jpg");
-        return writeResponseToFile(response, mediumImageFilePath);
+      const photoIdsToDelete = existingPhotoIds.filter(
+        (id) => !responsePhotoIds.includes(id)
+      );
+
+      photoIdsToDelete.forEach((id) => {
+        const directoryPathToDelete = path.join(imagesDirectoryPath, id);
+
+        fs.rm(
+          directoryPathToDelete,
+          { recursive: true, force: true },
+          (error) => {
+            if (error) {
+              throw error;
+            }
+          }
+        );
       });
-    });
+    })
+  );
+
+  parsedResponse.forEach((photo) => {
+    const imageDirectoryPath = path.join(imagesDirectoryPath, photo.id);
+
+    fs.mkdir(
+      imageDirectoryPath,
+      { recursive: true },
+      (error, createdDirPath) => {
+        if (error) {
+          throw error;
+        }
+
+        if (!createdDirPath) {
+          fs.readdir(imageDirectoryPath, (error, files) => {
+            if (error) {
+              throw error;
+            }
+
+            Promise.all([
+              ...(!files.includes("large.jpg")
+                ? [
+                    fetchAndWriteFile(
+                      photo.urlLarge,
+                      imageDirectoryPath,
+                      "large.jpg"
+                    ),
+                  ]
+                : []),
+
+              ...(!files.includes("medium.jpg")
+                ? [
+                    fetchAndWriteFile(
+                      photo.urlMedium,
+                      imageDirectoryPath,
+                      "medium.jpg"
+                    ),
+                  ]
+                : []),
+            ]).then(onDone);
+          });
+        } else {
+          Promise.all([
+            fetchAndWriteFile(photo.urlLarge, imageDirectoryPath, "large.jpg"),
+            fetchAndWriteFile(
+              photo.urlMedium,
+              imageDirectoryPath,
+              "medium.jpg"
+            ),
+          ]).then(onDone);
+        }
+      }
+    );
+  });
+};
+
+const fetchAndWriteFile = (url, directory, fileName) => {
+  return fetch(url).then((response) => {
+    const imageFilePath = path.join(directory, fileName);
+    return writeResponseToFile(response, imageFilePath);
   });
 };
 
