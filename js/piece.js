@@ -1,8 +1,127 @@
-export const makePiece = () => {
-  const piece = document.createElement("button");
-  piece.classList.add("piece");
+import { getFloatAttribute, getIntAttribute } from "./attribute.js";
 
-  return piece;
+class Piece extends HTMLElement {
+  resetXY() {
+    this.positionX = this.finalPositionX;
+    this.positionY = this.finalPositionY;
+  }
+
+  move(duration, delay) {
+    const animation = this.animate(
+      [
+        {
+          transform: `translate3d(${this.positionX}px, ${this.positionY}px, 0)`,
+        },
+
+        {
+          transform: `translate3d(${this.finalPositionX}px, ${this.finalPositionY}px, 0)`,
+        },
+      ],
+      { duration, delay, iterations: 1, fill: "forwards" }
+    );
+
+    animation.addEventListener("finish", () => this.resetXY());
+
+    return animation;
+  }
+
+  switchPosition(otherPiece) {
+    const { positionX, positionY, currentOrder } = this;
+    const {
+      positionX: otherPositionX,
+      positionY: otherPositionY,
+      currentOrder: otherCurrentOrder,
+    } = otherPiece;
+
+    this.finalPositionX = otherPositionX;
+    this.finalPositionY = otherPositionY;
+    this.currentOrder = otherCurrentOrder;
+
+    otherPiece.finalPositionX = positionX;
+    otherPiece.finalPositionY = positionY;
+    otherPiece.currentOrder = currentOrder;
+  }
+
+  isInCorrectOrder() {
+    return this.order === this.currentOrder;
+  }
+
+  connectedCallback() {
+    this.width = getFloatAttribute(this, "width");
+    this.height = getFloatAttribute(this, "height");
+    this.order = getIntAttribute(this, "order");
+    this.currentOrder = getIntAttribute(this, "current-order");
+    this.positionX = getFloatAttribute(this, "position-x");
+    this.positionY = getFloatAttribute(this, "position-y");
+    this.finalPositionX = getFloatAttribute(this, "final-position-x");
+    this.finalPositionY = getFloatAttribute(this, "final-position-y");
+    this.backgroundImage = this.getAttribute("background-image");
+    this.backgroundWidth = this.getAttribute("background-width");
+    this.backgroundHeight = this.getAttribute("background-height");
+
+    this.style.setProperty("--width", `${this.width}px`);
+    this.style.setProperty("--height", `${this.height}px`);
+    this.style.setProperty("--position-x", `${this.positionX}`);
+    this.style.setProperty("--position-y", `${this.positionY}`);
+
+    const button = document.createElement("button");
+
+    button.style.setProperty("--width", `${this.width}px`);
+    button.style.setProperty("--height", `${this.height}px`);
+    button.style.setProperty("--background-width", `${this.backgroundWidth}px`);
+    button.style.setProperty(
+      "--background-height",
+      `${this.backgroundHeight}px`
+    );
+    button.style.setProperty(
+      "background-image",
+      `url(${this.backgroundImage})`
+    );
+
+    button.style.setProperty("--image-position-x", `${-1 * this.positionX}px`);
+    button.style.setProperty("--image-position-y", `${-1 * this.positionY}px`);
+
+    this.appendChild(button);
+  }
+}
+
+window.customElements.define("image-piece", Piece);
+
+export const makePiece = (gridComplexity) => {
+  const getPieceXYFn = getPieceXY(gridComplexity);
+
+  return ({
+    width,
+    height,
+    backgroundWidth,
+    backgroundHeight,
+    backgroundImage,
+    index,
+    randomIndex,
+  }) => {
+    const piece = document.createElement("image-piece");
+
+    const [positionX, positionY] = getPieceXYFn(width, height, index);
+    const [finalPositionX, finalPositionY] = getPieceXYFn(
+      width,
+      height,
+      randomIndex
+    );
+
+    piece.setAttribute("width", width);
+    piece.setAttribute("height", height);
+    piece.setAttribute("background-width", backgroundWidth);
+    piece.setAttribute("background-height", backgroundHeight);
+    piece.setAttribute("background-image", backgroundImage);
+    piece.setAttribute("position-x", positionX);
+    piece.setAttribute("position-y", positionY);
+    piece.setAttribute("final-position-x", finalPositionX);
+    piece.setAttribute("final-position-y", finalPositionY);
+    piece.setAttribute("order", index);
+    piece.setAttribute("current-order", randomIndex);
+
+    return piece;
+  };
 };
 
 /**
@@ -38,54 +157,3 @@ export const getPieceXY =
 
     return [positionX, positionY];
   };
-
-/**
- *
- * @param {HTMLButtonElement} piece
- * @param {*} propertiesToAnimate
- * @param {*} animationTiming
- * @returns The move animation object
- */
-export const movePiece =
-  (onFinish) =>
-  (
-    piece,
-    { positionX, positionY, finalPositionX, finalPositionY },
-    { duration, delay }
-  ) => {
-    const animation = piece.animate(
-      [
-        {
-          transform: `translate3d(${positionX}px, ${positionY}px, 0)`,
-        },
-
-        {
-          transform: `translate3d(${finalPositionX}px, ${finalPositionY}px, 0)`,
-        },
-      ],
-      { duration, delay, iterations: 1, fill: "forwards" }
-    );
-
-    animation.addEventListener("finish", () => onFinish(piece));
-
-    return animation;
-  };
-
-/**
- * @param {HTMLDivElement} piece
- */
-export const resetPiecePositionXY = (piece) => {
-  const pieceStyle = getComputedStyle(piece);
-
-  piece.style.setProperty(
-    "--position-x",
-    pieceStyle.getPropertyValue("--final-position-x")
-  );
-  piece.style.setProperty(
-    "--position-y",
-    pieceStyle.getPropertyValue("--final-position-y")
-  );
-
-  piece.style.removeProperty("--final-position-x");
-  piece.style.removeProperty("--final-position-y");
-};
