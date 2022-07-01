@@ -25,7 +25,10 @@ class ImageSelector extends HTMLElement {
       button.dataset.imageId = imageId;
 
       const image = document.createElement("img");
-      image.src = `/img/${imageId}/medium.jpg`;
+
+      import(`../img/${imageId}/medium.jpg`).then((src) => {
+        image.src = src.default;
+      });
 
       button.appendChild(image);
 

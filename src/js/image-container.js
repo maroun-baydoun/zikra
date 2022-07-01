@@ -104,7 +104,9 @@ class ImageContainer extends HTMLElement {
 
     const imageId = this.getAttribute("image-id");
 
-    image.src = `/img/${imageId}/large.jpg`;
+    import(`../img/${imageId}/large.jpg`).then((src) => {
+      image.src = src.default;
+    });
   }
 }
 

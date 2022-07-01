@@ -6,19 +6,21 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "cd src && http-server --proxy http://localhost:8080?",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "format": "prettier --write .",
     "fetch-images": "node ./scripts/fetch-images.js",
     "generate-image-ids": "node ./scripts/generate-image-ids.js",
-    "publish-page": "node ./scripts/publish-page.js"
+    "publish-page": "npm run build && node ./scripts/publish-page.js"
   },
   "author": "Maroun Baydoun <maroun.baydoun@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "dotenv": "16.0.1",
     "gh-pages": "4.0.0",
-    "http-server": "14.1.0",
-    "node-fetch": "3.2.4",
-    "prettier": "2.6.2"
+    "node-fetch": "3.2.6",
+    "prettier": "2.7.1",
+    "vite": "2.9.13"
   }
 }
