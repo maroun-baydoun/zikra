@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "fetch-images": "node ./scripts/fetch-images.js",
     "generate-image-ids": "node ./scripts/generate-image-ids.js",
-    "publish-page": "npm run build && node ./scripts/publish-page.js"
+    "predeploy": "npm run build",
+    "deploy": "node ./scripts/publish-page.js"
   },
   "author": "Maroun Baydoun <maroun.baydoun@gmail.com>",
   "license": "MIT",
