@@ -2,6 +2,7 @@ import { configureRouter } from "./location.js";
 
 import { displayImageSelector, removeImageSelector } from "./image-selector.js";
 import { addImageContainer } from "./image-container.js";
+import { addTimer } from "./timer.js";
 
 export const ROUTES = [
   { name: "home", path: "/" },
@@ -25,6 +26,7 @@ export const goTo = configureRouter(ROUTES)(
       removeImageSelector();
       const { imageId } = parameters;
 
+      addTimer();
       addImageContainer({ imageId });
     }
   },
