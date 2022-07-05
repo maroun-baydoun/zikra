@@ -3,6 +3,7 @@ import { configureRouter } from "./location.js";
 import { displayImageSelector, removeImageSelector } from "./image-selector.js";
 import { addImageContainer } from "./image-container.js";
 import { addTimer } from "./timer.js";
+import { addPuzzleContainer } from "./puzzle-container";
 
 export const ROUTES = [
   { name: "home", path: "/" },
@@ -25,9 +26,9 @@ export const goTo = configureRouter(ROUTES)(
     } else if (routeName === "image") {
       removeImageSelector();
       const { imageId } = parameters;
-
-      addTimer();
-      addImageContainer({ imageId });
+      addPuzzleContainer({ imageId });
+      //addTimer();
+      //addImageContainer({ imageId });
     }
   },
   () => {}

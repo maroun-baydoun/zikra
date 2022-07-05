@@ -112,8 +112,8 @@ class ImageContainer extends HTMLElement {
 
 window.customElements.define("image-container", ImageContainer);
 
-export const addImageContainer = ({ imageId }) => {
-  const container = document.querySelector(".container");
+export const addImageContainer = ({ imageId }, container) => {
+  //const container = document.querySelector(".container");
 
   const { width: maxWidth, height: maxHeight } =
     container.getBoundingClientRect();

@@ -54,6 +54,18 @@ header h1 {
   margin: var(--spacing);
 }
 
+puzzle-container {
+  flex: 1;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 100px 1fr;
+  grid-template-areas:
+    ". timer"
+    "image image";
+  justify-content: center;
+  align-items: center;
+}
+
 .image-selector {
   width: 100%;
   max-width: var(--max-width);
@@ -78,6 +90,7 @@ header h1 {
 .image-container {
   position: relative;
   background-color: #ddd;
+  grid-area: image;
 
   width: var(--width);
   height: var(--height);
@@ -122,6 +135,8 @@ image-piece > button {
 game-timer {
   font-family: var(--font-family-sans-serif);
   font-size: var(--font-size-xl);
+
+  grid-area: timer;
 }
 
 .display-none {
