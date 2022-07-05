@@ -7,7 +7,11 @@ class PuzzleContainer extends HTMLElement {
     const gameTimer = document.createElement("game-timer");
     this.appendChild(gameTimer);
 
-    addImageContainer({ imageId }, this);
+    const imageContainer = addImageContainer({ imageId }, this);
+
+    imageContainer.addEventListener("shuffle-done", () => {
+      gameTimer.start();
+    });
   }
 }
 

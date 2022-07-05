@@ -85,6 +85,8 @@ class ImageContainer extends HTMLElement {
 
       const makePieceForGridComplexity = makePiece(4);
 
+      let numberOfPiecesDoneSuffling = 0;
+
       for (let index in indices) {
         const randomIndex = randomIndices[index];
         const piece = makePieceForGridComplexity({
@@ -98,7 +100,14 @@ class ImageContainer extends HTMLElement {
         });
 
         this.appendChild(piece);
-        piece.move(300, 1000);
+        piece.move(300, 1000, () => {
+          numberOfPiecesDoneSuffling++;
+
+          if (numberOfPiecesDoneSuffling === 16) {
+            const shuffleDoneEvent = new CustomEvent("shuffle-done");
+            this.dispatchEvent(shuffleDoneEvent);
+          }
+        });
       }
     };
 
@@ -113,8 +122,6 @@ class ImageContainer extends HTMLElement {
 window.customElements.define("image-container", ImageContainer);
 
 export const addImageContainer = ({ imageId }, container) => {
-  //const container = document.querySelector(".container");
-
   const { width: maxWidth, height: maxHeight } =
     container.getBoundingClientRect();
 

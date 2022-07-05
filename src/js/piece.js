@@ -6,7 +6,7 @@ class Piece extends HTMLElement {
     this.positionY = this.finalPositionY;
   }
 
-  move(duration, delay) {
+  move(duration, delay, callback) {
     const animation = this.animate(
       [
         {
@@ -20,7 +20,10 @@ class Piece extends HTMLElement {
       { duration, delay, iterations: 1, fill: "forwards" }
     );
 
-    animation.addEventListener("finish", () => this.resetXY());
+    animation.addEventListener("finish", () => {
+      this.resetXY();
+      callback && callback();
+    });
 
     return animation;
   }

@@ -58,7 +58,7 @@ puzzle-container {
   flex: 1;
   width: 100%;
   display: grid;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: 75px 1fr;
   grid-template-areas:
     ". timer"
     "image image";

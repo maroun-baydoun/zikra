@@ -1,29 +1,42 @@
 class Timer extends HTMLElement {
-  connectedCallback() {
-    this.seconds = 0;
+  constructor() {
+    super();
 
-    const dateTimeFormat = new Intl.DateTimeFormat("default", {
+    this.dateTimeFormat = new Intl.DateTimeFormat("default", {
       minute: "numeric",
       second: "numeric",
     });
-    let lastTime = new Date().getTime();
+
+    this.seconds = 0;
+  }
+
+  connectedCallback() {}
+
+  start() {
+    this.lastTime = new Date().getTime();
 
     const timer = () => {
       window.requestAnimationFrame(timer);
 
       const now = new Date().getTime();
 
-      if (now - lastTime >= 1000) {
-        lastTime = now;
+      this.displayTime();
+
+      if (now - this.lastTime >= 1000) {
+        this.lastTime = now;
         this.seconds++;
 
-        const date = new Date(this.seconds * 1000);
-
-        this.innerHTML = dateTimeFormat.format(date);
+        this.displayTime();
       }
     };
 
     timer();
+  }
+
+  displayTime() {
+    const date = new Date(this.seconds * 1000);
+
+    this.innerHTML = this.dateTimeFormat.format(date);
   }
 }
 
