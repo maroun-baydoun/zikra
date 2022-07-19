@@ -126,7 +126,6 @@ export const addImageContainer = ({ imageId }, container) => {
     container.getBoundingClientRect();
 
   const imageContainer = document.createElement("image-container");
-  imageContainer.classList.add("image-container");
   imageContainer.setAttribute("image-id", imageId);
   imageContainer.setAttribute("max-width", maxWidth);
   imageContainer.setAttribute("max-height", maxHeight);

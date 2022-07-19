@@ -75,7 +75,6 @@ puzzle-container {
     ". timer"
     "image image";
   justify-content: center;
-  align-items: center;
 }
 
 .image-selector {
@@ -99,10 +98,9 @@ puzzle-container {
   height: 100%;
 }
 
-.image-container {
+image-container {
   position: relative;
   background-color: #ddd;
-  grid-area: image;
 
   width: var(--width);
   height: var(--height);
@@ -147,8 +145,15 @@ image-piece > button {
 game-timer {
   font-family: var(--font-family-monospace);
   font-size: var(--font-size-xl);
+}
 
+puzzle-container game-timer {
   grid-area: timer;
+  align-self: center;
+}
+
+puzzle-container image-container {
+  grid-area: image;
 }
 
 .display-none {
