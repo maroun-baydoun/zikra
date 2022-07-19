@@ -13,6 +13,10 @@ class Timer extends HTMLElement {
 
   connectedCallback() {}
 
+  disconnectedCallback() {
+    this.stop();
+  }
+
   start() {
     this.lastTime = new Date().getTime();
 
@@ -51,9 +55,7 @@ class Timer extends HTMLElement {
 
 window.customElements.define("game-timer", Timer);
 
-export const addTimer = () => {
-  const container = document.querySelector(".container");
-
+export const addTimer = (container) => {
   const gameTimer = document.createElement("game-timer");
   container.appendChild(gameTimer);
 
