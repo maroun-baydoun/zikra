@@ -55,6 +55,10 @@ class ImageContainer extends HTMLElement {
 
     const puzzleSolvedEvent = new CustomEvent("puzzle-solved");
     this.dispatchEvent(puzzleSolvedEvent);
+
+    for (const piece of pieces) {
+      piece.fadeOut(400, 1000);
+    }
   }
 
   connectedCallback() {
@@ -116,6 +120,8 @@ class ImageContainer extends HTMLElement {
 
     import(`../img/${imageId}/large.jpg`).then((src) => {
       image.src = src.default;
+
+      this.style.setProperty("--background-image", `url(${image.src})`);
     });
   }
 }

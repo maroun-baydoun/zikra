@@ -45,7 +45,6 @@ export const displayImageSelector = () => {
   const container = document.querySelector(".container");
 
   const imageSelector = document.createElement("image-selector");
-  imageSelector.classList.add("image-selector");
 
   container.appendChild(imageSelector);
 

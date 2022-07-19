@@ -28,6 +28,28 @@ class Piece extends HTMLElement {
     return animation;
   }
 
+  fadeOut(duration, delay, callback) {
+    const animation = this.animate(
+      [
+        {
+          opacity: 1,
+        },
+
+        {
+          opacity: 0,
+        },
+      ],
+      { duration, delay, iterations: 1, fill: "forwards" }
+    );
+
+    animation.addEventListener("finish", () => {
+      callback && callback();
+      this.remove();
+    });
+
+    return animation;
+  }
+
   switchPosition(otherPiece) {
     const { positionX, positionY, currentOrder } = this;
     const {
