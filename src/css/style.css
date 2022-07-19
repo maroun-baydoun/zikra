@@ -7,6 +7,9 @@
   --font-size-m: 1rem;
   --font-size-l: 1.5rem;
   --font-size-xl: 2rem;
+
+  --color-black: #111;
+  --color-off-white: #eee;
 }
 
 * {
@@ -32,11 +35,15 @@ h1 {
 }
 
 header {
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 
   padding: var(--spacing);
+  background-color: var(--color-black);
+  color: var(--color-off-white);
 }
 
 header h1 {
