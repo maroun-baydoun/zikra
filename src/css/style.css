@@ -145,7 +145,7 @@ image-piece > button {
 }
 
 game-timer {
-  font-family: var(--font-family-sans-serif);
+  font-family: var(--font-family-monospace);
   font-size: var(--font-size-xl);
 
   grid-area: timer;
