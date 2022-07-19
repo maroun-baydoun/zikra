@@ -155,6 +155,33 @@ puzzle-container image-container {
   grid-area: image;
 }
 
+game-loader {
+  position: absolute;
+  opacity: 0;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  animation: display-loader 0.1s linear 0.5s 1 normal forwards,
+    loading 0.9s cubic-bezier(0.94, 0.31, 0.18, 0.43) 0s infinite normal
+      forwards;
+}
+
+@keyframes display-loader {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes loading {
+  from {
+    transform: translate3d(-50%, -50%, 0) rotateZ(0);
+  }
+  to {
+    transform: translate3d(-50%, -50%, 0) rotateZ(180deg);
+  }
+}
+
 .display-none {
   display: none;
 }

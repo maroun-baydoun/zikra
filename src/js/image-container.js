@@ -114,6 +114,9 @@ class ImageContainer extends HTMLElement {
           }
         });
       }
+
+      const imageLoadedEvent = new CustomEvent("image-loaded");
+      this.dispatchEvent(imageLoadedEvent);
     };
 
     const imageId = this.getAttribute("image-id");

@@ -1,5 +1,6 @@
 import { addImageContainer } from "./image-container.js";
 import { addTimer } from "./timer.js";
+import { addLoader } from "./loader.js";
 
 class PuzzleContainer extends HTMLElement {
   connectedCallback() {
@@ -7,7 +8,13 @@ class PuzzleContainer extends HTMLElement {
 
     const gameTimer = addTimer(this);
 
+    const loader = addLoader(this);
+
     const imageContainer = addImageContainer({ imageId }, this);
+
+    imageContainer.addEventListener("image-loaded", () => {
+      loader.remove();
+    });
 
     imageContainer.addEventListener("shuffle-done", () => {
       gameTimer.start();
