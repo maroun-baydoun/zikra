@@ -53,7 +53,8 @@ class ImageContainer extends HTMLElement {
       }
     }
 
-    alert("You won");
+    const puzzleSolvedEvent = new CustomEvent("puzzle-solved");
+    this.dispatchEvent(puzzleSolvedEvent);
   }
 
   connectedCallback() {

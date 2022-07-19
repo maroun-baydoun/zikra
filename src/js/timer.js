@@ -8,6 +8,7 @@ class Timer extends HTMLElement {
     });
 
     this.seconds = 0;
+    this.animationHandler = null;
   }
 
   connectedCallback() {}
@@ -16,7 +17,7 @@ class Timer extends HTMLElement {
     this.lastTime = new Date().getTime();
 
     const timer = () => {
-      window.requestAnimationFrame(timer);
+      this.animationHandler = window.requestAnimationFrame(timer);
 
       const now = new Date().getTime();
 
@@ -31,6 +32,14 @@ class Timer extends HTMLElement {
     };
 
     timer();
+  }
+
+  stop() {
+    if (this.animationHandler === null) {
+      return;
+    }
+
+    window.cancelAnimationFrame(this.animationHandler);
   }
 
   displayTime() {

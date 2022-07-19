@@ -12,6 +12,10 @@ class PuzzleContainer extends HTMLElement {
     imageContainer.addEventListener("shuffle-done", () => {
       gameTimer.start();
     });
+
+    imageContainer.addEventListener("puzzle-solved", () => {
+      gameTimer.stop();
+    });
   }
 }
 
