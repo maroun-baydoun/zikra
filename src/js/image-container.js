@@ -38,8 +38,8 @@ class ImageContainer extends HTMLElement {
 
     this.firstSelectedPiece.switchPosition(this.secondSelectedPiece);
 
-    this.firstSelectedPiece.move(300, 0);
-    this.secondSelectedPiece.move(300, 0);
+    this.firstSelectedPiece.move(200, 0);
+    this.secondSelectedPiece.move(200, 0);
 
     this.firstSelectedPiece = null;
 
