@@ -12,15 +12,12 @@
     "format": "prettier --write .",
     "fetch-images": "node ./scripts/fetch-images.js",
     "generate-image-ids": "node ./scripts/generate-image-ids.js",
-    "convert-webp": "node ./scripts/convert-webp.js",
-    "predeploy": "npm run build",
-    "deploy": "node ./scripts/publish-page.js"
+    "convert-webp": "node ./scripts/convert-webp.js"
   },
   "author": "Maroun Baydoun <maroun.baydoun@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "dotenv": "16.0.1",
-    "gh-pages": "4.0.0",
     "node-fetch": "3.2.6",
     "prettier": "2.7.1",
     "sharp": "0.30.7",
