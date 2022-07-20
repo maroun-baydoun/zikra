@@ -74,7 +74,7 @@ header h1 {
   align-items: center;
   justify-content: center;
 
-  margin: var(--spacing);
+  margin: calc(var(--spacing) * 2) var(--spacing);
 }
 
 puzzle-container {
@@ -90,11 +90,12 @@ puzzle-container {
 
 image-selector {
   width: 100%;
-  max-width: var(--max-width);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: 350px;
-  gap: 1em;
+
+  max-width: var(--max-width);
+  gap: calc(var(--spacing) * 2);
 }
 
 image-selector button {
@@ -141,7 +142,7 @@ image-piece[selected]::after {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-image-piece  button {
+image-piece button {
   cursor: pointer;
   padding: 0;
   border: 0;
