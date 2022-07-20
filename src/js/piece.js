@@ -17,7 +17,7 @@ class Piece extends HTMLElement {
           transform: `translate3d(${this.finalPositionX}px, ${this.finalPositionY}px, 0)`,
         },
       ],
-      { duration, delay, iterations: 1, fill: "forwards" }
+      { duration, delay, iterations: 1, fill: "forwards", easing: "ease-in" }
     );
 
     animation.addEventListener("finish", () => {
