@@ -13,12 +13,17 @@
   --font-size-l: 1.5rem;
   --font-size-xl: 2rem;
 
+  --font-weight-bold: bold;
+
   --color-black: #111;
   --color-off-white: #eee;
+  --color-outline: #ffaa33;
 
   --border-radius: 20px;
 
   --box-shadow-color: rgba(0, 0, 0, 0.3);
+
+  --header-z-index: 100;
 }
 
 * {
@@ -58,6 +63,7 @@ header {
   padding: var(--spacing);
   background-color: var(--color-black);
   color: var(--color-off-white);
+  z-index: var(--header-z-index);
 }
 
 @media screen and (min-width: 1024px) {
@@ -80,6 +86,7 @@ header h1 {
   justify-content: center;
 
   margin: calc(var(--spacing) * 2) var(--spacing);
+  z-index: calc(var(--header-z-index) - 1);
 }
 
 puzzle-container {
@@ -103,21 +110,78 @@ image-selector {
   gap: calc(var(--spacing) * 2);
 }
 
-image-selector button {
-  cursor: pointer;
+.image-card {
   padding: 0;
   background: transparent;
   border: 0;
-  overflow: hidden;
+  perspective: 1000px;
+}
+
+.image-card:focus {
+  outline: 0;
+}
+
+.image-card:focus-within .image-card-front,
+.image-card:focus-within .image-card-back {
+  outline: 3px solid var(--color-outline);
+}
+
+.image-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease-in;
+  transform-style: preserve-3d;
+}
+
+.image-card:hover .image-card-inner,
+.image-card:focus .image-card-inner {
+  transform: rotateY(180deg);
+}
+
+.image-card-front,
+.image-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
 
   border-radius: var(--border-radius);
   box-shadow: 0 10px 10px var(--box-shadow-color);
 }
 
-image-selector button img {
+.image-card-front {
+  overflow: hidden;
+}
+
+.image-card-back {
+  cursor: pointer;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-black);
+}
+
+.image-card img {
   object-fit: cover;
   width: 100%;
   height: 100%;
+}
+
+.play-button {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+
+  color: var(--color-off-white);
+  padding: var(--spacing);
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-sans-serif);
 }
 
 image-container {

@@ -6,13 +6,19 @@ class ImageSelector extends HTMLElement {
 
     const { target } = event;
 
-    const button = target.closest("button");
+    const isBackOfCardClicked = target.closest(".image-card-back") !== null;
 
-    if (!button) {
+    if (!isBackOfCardClicked) {
+      return true;
+    }
+
+    const card = target.closest(".image-card");
+
+    if (!card) {
       return;
     }
 
-    const imageId = button.dataset.imageId;
+    const imageId = card.dataset.imageId;
 
     const imageSelectedEvent = new CustomEvent("image-selected", {
       detail: imageId,
@@ -25,6 +31,16 @@ class ImageSelector extends HTMLElement {
     IMAGE_IDS.forEach((imageId) => {
       const button = document.createElement("button");
       button.dataset.imageId = imageId;
+      button.classList.add("image-card");
+
+      const inner = document.createElement("div");
+      inner.classList.add("image-card-inner");
+
+      const front = document.createElement("div");
+      front.classList.add("image-card-front");
+
+      const back = document.createElement("div");
+      back.classList.add("image-card-back");
 
       const image = document.createElement("img");
 
@@ -32,12 +48,22 @@ class ImageSelector extends HTMLElement {
         image.src = src.default;
       });
 
-      button.appendChild(image);
+      front.appendChild(image);
+
+      const playButton = document.createElement("button");
+      playButton.classList.add("play-button");
+      playButton.appendChild(document.createTextNode("Play!"));
+
+      back.appendChild(playButton);
+
+      inner.appendChild(front);
+      inner.appendChild(back);
+
+      button.appendChild(inner);
 
       this.appendChild(button);
     });
 
-    this.addEventListener("touchstart", this.onImageSelected);
     this.addEventListener("click", this.onImageSelected);
   }
 }
