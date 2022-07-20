@@ -10,7 +10,9 @@ class ImageContainer extends HTMLElement {
     this.secondSelectedPiece = null;
   }
 
-  onClicked(event) {
+  onSelected(event) {
+    event.preventDefault();
+
     const { target } = event;
 
     const piece = target.closest("image-piece");
@@ -73,7 +75,8 @@ class ImageContainer extends HTMLElement {
       this.style.setProperty("--width", `${image.width}px`);
       this.style.setProperty("--height", `${image.height}px`);
 
-      this.addEventListener("click", this.onClicked);
+      this.addEventListener("touchstart", this.onSelected);
+      this.addEventListener("click", this.onSelected);
 
       const getPieceDimensionsFn = getPieceDimensions(4);
 

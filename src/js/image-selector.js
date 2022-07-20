@@ -1,8 +1,10 @@
 import { IMAGE_IDS } from "./image-ids.js";
 
 class ImageSelector extends HTMLElement {
-  onImageSelected(clickEvent) {
-    const { target } = clickEvent;
+  onImageSelected(event) {
+    event.preventDefault();
+
+    const { target } = event;
 
     const button = target.closest("button");
 
@@ -35,6 +37,7 @@ class ImageSelector extends HTMLElement {
       this.appendChild(button);
     });
 
+    this.addEventListener("touchstart", this.onImageSelected);
     this.addEventListener("click", this.onImageSelected);
   }
 }
