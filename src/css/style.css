@@ -15,6 +15,10 @@
 
   --color-black: #111;
   --color-off-white: #eee;
+
+  --border-radius: 20px;
+
+  --box-shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -25,17 +29,18 @@ html,
 body {
   padding: 0;
   margin: 0;
-  height: 100%;
 }
 
 html {
   scroll-behavior: smooth;
+  min-height: 100%;
 }
 
 body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 h1 {
@@ -103,6 +108,10 @@ image-selector button {
   padding: 0;
   background: transparent;
   border: 0;
+  overflow: hidden;
+
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 10px var(--box-shadow-color);
 }
 
 image-selector button img {
@@ -113,9 +122,12 @@ image-selector button img {
 
 image-container {
   position: relative;
+  overflow: hidden;
 
   width: var(--width);
   height: var(--height);
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 10px var(--box-shadow-color);
 }
 
 image-piece {
