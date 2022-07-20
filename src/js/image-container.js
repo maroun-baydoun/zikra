@@ -58,9 +58,28 @@ class ImageContainer extends HTMLElement {
     const puzzleSolvedEvent = new CustomEvent("puzzle-solved");
     this.dispatchEvent(puzzleSolvedEvent);
 
-    for (const piece of pieces) {
-      piece.fadeOut(400, 1000);
-    }
+    this.fadeOut(400, 1000);
+  }
+
+  fadeOut(duration, delay, callback) {
+    const animation = this.animate(
+      [
+        {
+          opacity: 1,
+        },
+
+        {
+          opacity: 0,
+        },
+      ],
+      { duration, delay, iterations: 1, fill: "forwards" }
+    );
+
+    animation.addEventListener("finish", () => {
+      callback && callback();
+    });
+
+    return animation;
   }
 
   connectedCallback() {
