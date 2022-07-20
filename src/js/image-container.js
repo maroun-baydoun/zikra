@@ -75,9 +75,6 @@ class ImageContainer extends HTMLElement {
       this.style.setProperty("--width", `${image.width}px`);
       this.style.setProperty("--height", `${image.height}px`);
 
-      this.addEventListener("touchstart", this.onSelected);
-      this.addEventListener("click", this.onSelected);
-
       const getPieceDimensionsFn = getPieceDimensions(4);
 
       const [width, height] = getPieceDimensionsFn(image.width, image.height);
@@ -114,6 +111,9 @@ class ImageContainer extends HTMLElement {
           if (numberOfPiecesDoneSuffling === 16) {
             const shuffleDoneEvent = new CustomEvent("shuffle-done");
             this.dispatchEvent(shuffleDoneEvent);
+
+            this.addEventListener("touchstart", this.onSelected);
+            this.addEventListener("click", this.onSelected);
           }
         });
       }
