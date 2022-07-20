@@ -98,6 +98,7 @@ image-selector {
 }
 
 image-selector button {
+  cursor: pointer;
   padding: 0;
   background: transparent;
   border: 0;
@@ -140,7 +141,8 @@ image-piece[selected]::after {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-image-piece > button {
+image-piece  button {
+  cursor: pointer;
   padding: 0;
   border: 0;
 
