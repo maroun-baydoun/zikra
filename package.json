@@ -12,6 +12,7 @@
     "format": "prettier --write .",
     "fetch-images": "node ./scripts/fetch-images.js",
     "generate-image-ids": "node ./scripts/generate-image-ids.js",
+    "convert-webp": "node ./scripts/convert-webp.js",
     "predeploy": "npm run build",
     "deploy": "node ./scripts/publish-page.js"
   },
@@ -22,6 +23,7 @@
     "gh-pages": "4.0.0",
     "node-fetch": "3.2.6",
     "prettier": "2.7.1",
+    "sharp": "0.30.7",
     "vite": "2.9.13"
   }
 }

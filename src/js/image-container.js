@@ -124,7 +124,7 @@ class ImageContainer extends HTMLElement {
 
     const imageId = this.getAttribute("image-id");
 
-    import(`../img/${imageId}/large.jpg`).then((src) => {
+    import(`../img/${imageId}/large.webp`).then((src) => {
       image.src = src.default;
 
       this.style.setProperty("--background-image", `url(${image.src})`);

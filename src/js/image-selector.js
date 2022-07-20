@@ -28,7 +28,7 @@ class ImageSelector extends HTMLElement {
 
       const image = document.createElement("img");
 
-      import(`../img/${imageId}/medium.jpg`).then((src) => {
+      import(`../img/${imageId}/medium.webp`).then((src) => {
         image.src = src.default;
       });
 
