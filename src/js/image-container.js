@@ -58,18 +58,24 @@ class ImageContainer extends HTMLElement {
     const puzzleSolvedEvent = new CustomEvent("puzzle-solved");
     this.dispatchEvent(puzzleSolvedEvent);
 
-    this.fadeOut(400, 1000);
+    this.flip(400, 1000);
   }
 
-  fadeOut(duration, delay, callback) {
-    const animation = this.animate(
+  flip(duration, delay, callback) {
+    const inner = this.querySelector(".pieces-container-inner");
+
+    if (!inner) {
+      return;
+    }
+
+    const animation = inner.animate(
       [
         {
-          opacity: 1,
+          transform: "none",
         },
 
         {
-          opacity: 0,
+          transform: "rotateY(180deg)",
         },
       ],
       { duration, delay, iterations: 1, fill: "forwards" }
@@ -84,6 +90,20 @@ class ImageContainer extends HTMLElement {
 
   connectedCallback() {
     const image = new Image();
+
+    const inner = document.createElement("div");
+    inner.classList.add("pieces-container-inner");
+
+    const front = document.createElement("div");
+    front.classList.add("pieces-container-front");
+
+    const back = document.createElement("div");
+    back.classList.add("pieces-container-back");
+
+    inner.appendChild(front);
+    inner.appendChild(back);
+
+    this.appendChild(inner);
 
     image.onload = () => {
       const maxWidth = Number.parseFloat(this.getAttribute("max-width"));
@@ -123,7 +143,7 @@ class ImageContainer extends HTMLElement {
           randomIndex,
         });
 
-        this.appendChild(piece);
+        front.appendChild(piece);
         piece.move(300, 1000, () => {
           numberOfPiecesDoneSuffling++;
 
