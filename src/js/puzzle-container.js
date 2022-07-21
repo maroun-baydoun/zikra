@@ -24,6 +24,7 @@ class PuzzleContainer extends HTMLElement {
 
     imageContainer.addEventListener("puzzle-solved", () => {
       gameTimer.stop();
+      gameTimer.fadeOut(300, 200);
       imageContainer.displayResult({
         time: formatSeconds()(gameTimer.seconds),
       });
