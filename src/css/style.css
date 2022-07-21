@@ -239,6 +239,8 @@ image-piece button {
 }
 
 game-timer {
+  user-select: none;
+
   font-family: var(--font-family-monospace);
   font-size: var(--font-size-xl);
 }
