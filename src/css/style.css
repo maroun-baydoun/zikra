@@ -54,27 +54,23 @@ h1 {
 }
 
 header {
-  position: sticky;
-  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 
   padding: var(--spacing);
-  background-color: var(--color-black);
-  color: var(--color-off-white);
+  font-size: var(--font-size-xl);
+  color: var(--color-black);
   z-index: var(--header-z-index);
-}
-
-@media screen and (min-width: 1024px) {
-  header {
-    position: unset;
-    top: unset;
-  }
 }
 
 header h1 {
   flex: 1;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
   max-width: var(--max-width);
 }
 
