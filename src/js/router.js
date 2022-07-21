@@ -11,12 +11,34 @@ export const ROUTES = [
   },
 ];
 
+const animateHeader = () => {
+  const header = document.querySelector("header");
+  const { fontSize: originalHeaderFontSize } = window.getComputedStyle(header);
+
+  const animate = (targetFontSize) => () => {
+    header.animate(
+      [
+        {
+          fontSize: targetFontSize,
+        },
+      ],
+      { duration: 200, delay: 200, fill: "forwards" }
+    );
+  };
+
+  return [animate(originalHeaderFontSize), animate(0)];
+};
+
+const [expandHeader, shrinkHeader] = animateHeader();
+
 export const goTo = configureRouter(ROUTES)(
   (routeName, parameters) => {
     const container = document.querySelector(".container");
     clearContainer(container);
 
     if (routeName === "home") {
+      expandHeader();
+
       const imageSelector = displayImageSelector();
 
       imageSelector.addEventListener("image-selected", (event) => {
@@ -25,6 +47,7 @@ export const goTo = configureRouter(ROUTES)(
         goTo(`/image/${imageId}`);
       });
     } else if (routeName === "image") {
+      shrinkHeader();
       removeImageSelector();
       const { imageId } = parameters;
       addPuzzleContainer({ imageId });

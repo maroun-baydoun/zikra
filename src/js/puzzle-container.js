@@ -14,8 +14,6 @@ class PuzzleContainer extends HTMLElement {
 
     imageContainer.addEventListener("image-loaded", () => {
       loader.remove();
-
-      this.scrollIntoView();
     });
 
     imageContainer.addEventListener("shuffle-done", () => {
