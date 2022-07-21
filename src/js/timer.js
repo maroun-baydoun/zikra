@@ -1,14 +1,24 @@
+export const formatSeconds = () => {
+  const dateTimeFormat = new Intl.DateTimeFormat("default", {
+    minute: "numeric",
+    second: "numeric",
+  });
+
+  return (seconds) => {
+    const date = new Date(seconds * 1000);
+
+    return dateTimeFormat.format(date);
+  };
+};
+
 class Timer extends HTMLElement {
   constructor() {
     super();
 
-    this.dateTimeFormat = new Intl.DateTimeFormat("default", {
-      minute: "numeric",
-      second: "numeric",
-    });
-
     this.seconds = 0;
     this.animationHandler = null;
+
+    this.format = formatSeconds();
   }
 
   connectedCallback() {}
@@ -47,9 +57,7 @@ class Timer extends HTMLElement {
   }
 
   displayTime() {
-    const date = new Date(this.seconds * 1000);
-
-    this.innerHTML = this.dateTimeFormat.format(date);
+    this.innerHTML = this.format(this.seconds);
   }
 }
 

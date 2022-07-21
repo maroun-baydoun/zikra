@@ -228,7 +228,17 @@ image-container {
   align-items: center;
   justify-content: center;
 
+  gap: var(--spacing);
   background-color: var(--color-black);
+  color: var(--color-off-white);
+  font-size: var(--font-size-l);
+  font-family: var(--font-family-sans-serif);
+}
+
+.pieces-container-score {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xl);
+  font-family: var(--font-family-monospace);
 }
 
 image-piece {

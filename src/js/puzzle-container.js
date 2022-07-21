@@ -1,5 +1,5 @@
 import { addImageContainer } from "./image-container.js";
-import { addTimer } from "./timer.js";
+import { addTimer, formatSeconds } from "./timer.js";
 import { addLoader } from "./loader.js";
 
 class PuzzleContainer extends HTMLElement {
@@ -24,6 +24,9 @@ class PuzzleContainer extends HTMLElement {
 
     imageContainer.addEventListener("puzzle-solved", () => {
       gameTimer.stop();
+      imageContainer.displayResult({
+        time: formatSeconds()(gameTimer.seconds),
+      });
     });
   }
 }

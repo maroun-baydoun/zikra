@@ -88,6 +88,25 @@ class ImageContainer extends HTMLElement {
     return animation;
   }
 
+  displayResult({ time }) {
+    const back = this.querySelector(".pieces-container-back");
+
+    if (!back) {
+      return;
+    }
+
+    const finished = document.createElement("div");
+    finished.classList.add("pieces-container-finished");
+    finished.appendChild(document.createTextNode("You finished in:"));
+
+    const score = document.createElement("div");
+    score.classList.add("pieces-container-score");
+    score.appendChild(document.createTextNode(time));
+
+    back.appendChild(finished);
+    back.appendChild(score);
+  }
+
   connectedCallback() {
     const image = new Image();
 
