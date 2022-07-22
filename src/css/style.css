@@ -21,7 +21,7 @@
 
   --border-radius: 20px;
 
-  --box-shadow-color: rgba(0, 0, 0, 0.3);
+  --box-shadow-color: rgba(0, 0, 0, 0.2);
 
   --header-z-index: 100;
 }
@@ -151,7 +151,7 @@ image-selector {
   -webkit-backface-visibility: hidden;
 
   border-radius: var(--border-radius);
-  box-shadow: 0 10px 10px var(--box-shadow-color);
+  box-shadow: 0 5px 10px var(--box-shadow-color);
 }
 
 .image-card-front {
@@ -190,6 +190,7 @@ image-selector {
 
 image-container {
   position: relative;
+  background: transparent;
   perspective: 1000px;
 
   width: var(--width);
@@ -213,7 +214,7 @@ image-container {
   -webkit-backface-visibility: hidden;
 
   border-radius: var(--border-radius);
-  box-shadow: 0 10px 10px var(--box-shadow-color);
+  box-shadow: 0 5px 10px var(--box-shadow-color);
 }
 
 .pieces-container-front {
