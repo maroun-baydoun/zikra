@@ -69,7 +69,6 @@ header h1 {
   letter-spacing: 0.5rem;
   text-transform: uppercase;
   text-align: center;
-  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 
   max-width: var(--max-width);
 }
