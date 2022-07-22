@@ -11,25 +11,25 @@ export const ROUTES = [
   },
 ];
 
-const animateHeader = () => {
-  const header = document.querySelector("header");
-  const { fontSize: originalHeaderFontSize } = window.getComputedStyle(header);
+const animateContainer = () => {
+  const container = document.querySelector(".container");
+  const { top: orginalTop } = container.getBoundingClientRect();
 
-  const animate = (targetFontSize) => () => {
-    header.animate(
+  const animate = (targetTop) => () => {
+    container.animate(
       [
         {
-          fontSize: targetFontSize,
+          transform: `translateY(${-targetTop}px)`,
         },
       ],
-      { duration: 200, delay: 200, fill: "forwards" }
+      { duration: 200, delay: 200, fill: "forwards", easing: "ease-in" }
     );
   };
 
-  return [animate(originalHeaderFontSize), animate(0)];
+  return [animate(orginalTop), animate(0)];
 };
 
-const [expandHeader, shrinkHeader] = animateHeader();
+const [pullContainerUp, pullContainerDown] = animateContainer();
 
 export const goTo = configureRouter(ROUTES)(
   (routeName, parameters) => {
@@ -37,8 +37,7 @@ export const goTo = configureRouter(ROUTES)(
     clearContainer(container);
 
     if (routeName === "home") {
-      expandHeader();
-
+      pullContainerDown();
       const imageSelector = displayImageSelector();
 
       imageSelector.addEventListener("image-selected", (event) => {
@@ -47,7 +46,7 @@ export const goTo = configureRouter(ROUTES)(
         goTo(`/image/${imageId}`);
       });
     } else if (routeName === "image") {
-      shrinkHeader();
+      pullContainerUp();
       removeImageSelector();
       const { imageId } = parameters;
       addPuzzleContainer({ imageId });
