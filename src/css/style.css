@@ -88,8 +88,10 @@ puzzle-container {
   flex: 1;
   width: 100%;
   display: grid;
-  grid-template-rows: 75px 1fr;
+  grid-template-rows: 50px 75px 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
+    "back . ."
     ". timer ."
     "image image image";
   justify-content: center;
@@ -295,10 +297,12 @@ game-timer:empty {
 puzzle-container game-timer {
   grid-area: timer;
   align-self: center;
+  justify-self: center;
 }
 
 puzzle-container image-container {
   grid-area: image;
+  justify-self: center;
 }
 
 game-loader {

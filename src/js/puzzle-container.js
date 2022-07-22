@@ -1,10 +1,13 @@
 import { addImageContainer } from "./image-container.js";
 import { addTimer, formatSeconds } from "./timer.js";
+import { addBackArrow } from "./back-arrow";
 import { addLoader } from "./loader.js";
 
 class PuzzleContainer extends HTMLElement {
   connectedCallback() {
     const imageId = this.getAttribute("image-id");
+
+    const backArrow = addBackArrow(this);
 
     const gameTimer = addTimer(this);
 
