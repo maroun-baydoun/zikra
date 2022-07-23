@@ -35,9 +35,7 @@ class PuzzleContainer extends HTMLElement {
 
 window.customElements.define("puzzle-container", PuzzleContainer);
 
-export const addPuzzleContainer = ({ imageId }) => {
-  const container = document.querySelector(".container");
-
+export const addPuzzleContainer = (container, { imageId }) => {
   const puzzleContainer = document.createElement("puzzle-container");
   puzzleContainer.setAttribute("image-id", imageId);
   container.appendChild(puzzleContainer);

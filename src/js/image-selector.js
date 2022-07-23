@@ -70,22 +70,10 @@ class ImageSelector extends HTMLElement {
 
 window.customElements.define("image-selector", ImageSelector);
 
-export const displayImageSelector = () => {
-  const container = document.querySelector(".container");
-
+export const displayImageSelector = (container) => {
   const imageSelector = document.createElement("image-selector");
 
   container.appendChild(imageSelector);
 
   return imageSelector;
-};
-
-export const removeImageSelector = () => {
-  const imageSelector = document.querySelector("image-selector");
-
-  if (!imageSelector) {
-    return;
-  }
-
-  imageSelector.remove();
 };

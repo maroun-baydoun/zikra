@@ -1,44 +1,29 @@
 import { configureRouter } from "./location.js";
 
-import { displayImageSelector, removeImageSelector } from "./image-selector.js";
+import { addSplashScreen } from "./splash-screen.js";
+import { displayImageSelector } from "./image-selector.js";
 import { addPuzzleContainer } from "./puzzle-container";
 
 export const ROUTES = [
   { name: "home", path: "/" },
+  { name: "images", path: "/images" },
   {
     name: "image",
     path: "/image/${imageId}",
   },
 ];
 
-const animateContainer = () => {
-  const container = document.querySelector(".container");
-  const { top: orginalTop } = container.getBoundingClientRect();
-
-  const animate = (targetTop) => () => {
-    container.animate(
-      [
-        {
-          transform: `translateY(${-targetTop}px)`,
-        },
-      ],
-      { duration: 200, delay: 200, fill: "forwards", easing: "ease-in" }
-    );
-  };
-
-  return [animate(orginalTop), animate(0)];
-};
-
-const [pullContainerUp, pullContainerDown] = animateContainer();
-
 export const goTo = configureRouter(ROUTES)(
   (routeName, parameters) => {
-    const container = document.querySelector(".container");
-    clearContainer(container);
+    const body = document.querySelector("body");
+
+    clearContainer(body);
 
     if (routeName === "home") {
-      pullContainerDown();
-      const imageSelector = displayImageSelector();
+      addSplashScreen(body);
+    } else if (routeName === "images") {
+      const container = addContainer(body);
+      const imageSelector = displayImageSelector(container);
 
       imageSelector.addEventListener("image-selected", (event) => {
         const { detail: imageId } = event;
@@ -46,10 +31,10 @@ export const goTo = configureRouter(ROUTES)(
         goTo(`/image/${imageId}`);
       });
     } else if (routeName === "image") {
-      pullContainerUp();
-      removeImageSelector();
       const { imageId } = parameters;
-      addPuzzleContainer({ imageId });
+
+      const container = addContainer(body);
+      addPuzzleContainer(container, { imageId });
     }
   },
   () => {}
@@ -63,4 +48,13 @@ const clearContainer = (container) => {
   while (container.firstChild) {
     container.removeChild(container.lastChild);
   }
+};
+
+const addContainer = (body) => {
+  const container = document.createElement("main");
+  container.classList.add("container");
+
+  body.appendChild(container);
+
+  return container;
 };
