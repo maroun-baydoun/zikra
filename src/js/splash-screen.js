@@ -9,7 +9,7 @@ template.innerHTML = `
 </header>
 
 <main class="container">
- <za-link href="/images" class="button">Start</za-link>
+ <za-link href="/images" class="button button-rounded">Start</za-link>
 </main>
 `;
 

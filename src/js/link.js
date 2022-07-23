@@ -10,7 +10,7 @@ a {
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 
-  color: var(--color-black);
+  color: inherit;
 }
 </style>
 <a>
@@ -53,8 +53,10 @@ export const register = () => {
   window.customElements.define(LinkTagName, Link);
 };
 
-export const addLink = (container) => {
+export const addLink = (container, { child, href }) => {
   const link = document.createElement(LinkTagName);
+  link.setAttribute("href", href);
+  link.appendChild(child);
 
   container.appendChild(link);
 

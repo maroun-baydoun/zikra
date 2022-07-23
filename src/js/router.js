@@ -23,13 +23,7 @@ export const goTo = configureRouter(ROUTES)(
       addSplashScreen(body);
     } else if (routeName === "images") {
       const container = addContainer(body);
-      const imageSelector = displayImageSelector(container);
-
-      imageSelector.addEventListener("image-selected", (event) => {
-        const { detail: imageId } = event;
-
-        goTo(`/image/${imageId}`);
-      });
+      displayImageSelector(container);
     } else if (routeName === "image") {
       const { imageId } = parameters;
 

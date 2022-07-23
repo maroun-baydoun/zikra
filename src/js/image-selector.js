@@ -1,32 +1,7 @@
 import { IMAGE_IDS } from "./image-ids.js";
+import { addLink } from "./link.js";
 
 class ImageSelector extends HTMLElement {
-  onImageSelected(event) {
-    event.preventDefault();
-
-    const { target } = event;
-
-    const isBackOfCardClicked = target.closest(".image-card-back") !== null;
-
-    if (!isBackOfCardClicked) {
-      return true;
-    }
-
-    const card = target.closest(".image-card");
-
-    if (!card) {
-      return;
-    }
-
-    const imageId = card.dataset.imageId;
-
-    const imageSelectedEvent = new CustomEvent("image-selected", {
-      detail: imageId,
-    });
-
-    this.dispatchEvent(imageSelectedEvent);
-  }
-
   connectedCallback() {
     IMAGE_IDS.forEach((imageId) => {
       const button = document.createElement("button");
@@ -50,9 +25,11 @@ class ImageSelector extends HTMLElement {
 
       front.appendChild(image);
 
-      const playButton = document.createElement("button");
-      playButton.classList.add("play-button");
-      playButton.appendChild(document.createTextNode("Play!"));
+      const playButton = addLink(back, {
+        child: document.createTextNode("Play!"),
+        href: `/image/${imageId}`,
+      });
+      playButton.classList.add("button");
 
       back.appendChild(playButton);
 
@@ -63,8 +40,6 @@ class ImageSelector extends HTMLElement {
 
       this.appendChild(button);
     });
-
-    this.addEventListener("click", this.onImageSelected);
   }
 }
 
