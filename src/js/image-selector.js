@@ -29,7 +29,7 @@ class ImageSelector extends HTMLElement {
         child: document.createTextNode("Play!"),
         href: `/image/${imageId}`,
       });
-      playButton.classList.add("button");
+      playButton.classList.add("button", "button-full-width");
 
       back.appendChild(playButton);
 

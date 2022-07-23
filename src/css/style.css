@@ -82,6 +82,10 @@ button {
   border-radius: calc(var(--border-radius) * 2);
 }
 
+.button-full-width {
+  max-width: unset;
+}
+
 a.button {
   text-decoration: none;
 }
