@@ -6,7 +6,7 @@ const template = document.createElement("template");
 
 template.innerHTML = `
 <style>
- a {
+ za-link {
     display: inline-block;
     width:35px;
   }
@@ -16,9 +16,9 @@ template.innerHTML = `
 
  }
 </style>
-<a href="/">
+<za-link href="/images">
 ${arrowLeftSvg}
-</a>
+</za-link>
 `;
 
 class BackArrow extends HTMLElement {
