@@ -18,6 +18,15 @@ class ImageSelector extends HTMLElement {
       back.classList.add("image-card-back");
 
       const image = document.createElement("img");
+      image.loading = "lazy";
+
+      image.onload = () => {
+        image.animate([{ opacity: 1 }], {
+          duration: 200,
+          fill: "forwards",
+          easing: "ease-out",
+        });
+      };
 
       import(`../img/${imageId}/medium.webp`).then((src) => {
         image.src = src.default;

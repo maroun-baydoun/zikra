@@ -212,6 +212,7 @@ image-selector {
 
 .image-card-front,
 .image-card-back {
+  overflow: hidden;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -223,7 +224,7 @@ image-selector {
 }
 
 .image-card-front {
-  overflow: hidden;
+  background-color: var(--color-black);
 }
 
 .image-card-back {
@@ -232,7 +233,6 @@ image-selector {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 
   background-color: var(--color-black);
 }
@@ -245,6 +245,7 @@ image-selector {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  opacity: 0;
 }
 
 image-container {
