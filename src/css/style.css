@@ -151,6 +151,19 @@ puzzle-container {
   justify-content: center;
 }
 
+@media screen and (min-width: 1024px) {
+  puzzle-container {
+    grid-template-rows: 75px 1fr;
+    grid-template-areas:
+      "back timer ."
+      "image image image";
+  }
+}
+
+puzzle-container za-back-arrow {
+  grid-area: back;
+}
+
 image-selector {
   width: 100%;
   display: grid;
