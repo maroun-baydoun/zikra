@@ -19,7 +19,12 @@ const convertToWebp = () => {
         }
 
         imageFiles.forEach((imageFile) => {
-          const imageFileName = imageFile.split(".")[0];
+          const [imageFileName, imageFileExtension] = imageFile.split(".");
+
+          if (imageFileExtension === "webp") {
+            return;
+          }
+
           const imagePath = path.join(
             imagesDirectoryPath,
             directory,
