@@ -135,7 +135,7 @@ header h2 {
   justify-content: center;
   position: relative;
 
-  padding: calc(var(--spacing) * 2) var(--spacing);
+  padding: var(--spacing);
 }
 
 puzzle-container {
@@ -162,6 +162,7 @@ puzzle-container {
 
 puzzle-container za-back-arrow {
   grid-area: back;
+  align-self: center;
 }
 
 image-selector {
@@ -173,6 +174,7 @@ image-selector {
   max-width: var(--max-width);
   gap: calc(var(--spacing) * 2);
   padding: 0 var(--spacing);
+  margin: var(--spacing) 0;
 }
 
 @media screen and (min-width: 1024px) {
