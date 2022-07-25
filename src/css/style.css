@@ -20,7 +20,7 @@
   --color-off-white: #eee;
   --color-outline: #ffaa33;
 
-  --border-radius: 20px;
+  --border-radius: 25px;
 
   --box-shadow-color: rgba(0, 0, 0, 0.2);
 
@@ -183,13 +183,20 @@ image-selector {
 
 .image-card {
   padding: 0;
-  background: transparent;
   border: 0;
-  perspective: 1000px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.2s all ease-out;
+
+  background: var(--color-black);
 }
 
-.image-card:focus {
+.image-card:focus,
+.image-card:hover {
   outline: 0;
+  transform: translateY(-3px);
+
+  box-shadow: 0 5px 10px var(--box-shadow-color);
 }
 
 .image-card:focus-within .image-card-front,
@@ -197,48 +204,44 @@ image-selector {
   outline: 3px solid var(--color-outline);
 }
 
-.image-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.4s ease-in;
-  transform-style: preserve-3d;
-}
-
-.image-card:hover .image-card-inner,
-.image-card:focus .image-card-inner {
-  transform: rotateY(180deg);
-}
-
-.image-card-front,
-.image-card-back {
-  overflow: hidden;
+.image-card-overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-
-  border-radius: var(--border-radius);
-  box-shadow: 0 5px 10px var(--box-shadow-color);
-}
-
-.image-card-front {
-  background-color: var(--color-black);
-}
-
-.image-card-back {
-  transform: rotateY(180deg);
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: 0.5s opacity ease-out;
+  transform: translateY(100%);
 
-  background-color: var(--color-black);
+  padding: var(--spacing);
 }
 
-.image-card-back .button {
+.image-card:hover .image-card-overlay,
+.image-card:focus-within .image-card-overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.image-card-overlay .button {
   margin-top: auto;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .image-card-overlay .button {
+    transition: 0.3s transform ease-out;
+    transition-delay: 0.5s;
+    transform: translateY(200%);
+  }
+
+  .image-card:hover .image-card-overlay .button {
+    transform: translateY(0);
+  }
 }
 
 .image-card img {

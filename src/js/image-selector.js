@@ -4,18 +4,8 @@ import { addLink } from "./link.js";
 class ImageSelector extends HTMLElement {
   connectedCallback() {
     IMAGE_IDS.forEach((imageId) => {
-      const button = document.createElement("button");
-      button.dataset.imageId = imageId;
-      button.classList.add("image-card");
-
-      const inner = document.createElement("div");
-      inner.classList.add("image-card-inner");
-
-      const front = document.createElement("div");
-      front.classList.add("image-card-front");
-
-      const back = document.createElement("div");
-      back.classList.add("image-card-back");
+      const card = document.createElement("div");
+      card.classList.add("image-card");
 
       const image = document.createElement("img");
       image.loading = "lazy";
@@ -32,22 +22,19 @@ class ImageSelector extends HTMLElement {
         image.src = src.default;
       });
 
-      front.appendChild(image);
+      const overlay = document.createElement("div");
+      overlay.classList.add("image-card-overlay");
 
-      const playButton = addLink(back, {
+      card.appendChild(image);
+      card.appendChild(overlay);
+
+      const playButton = addLink(overlay, {
         child: document.createTextNode("Play!"),
         href: `/image/${imageId}`,
       });
-      playButton.classList.add("button", "button-full-width");
+      playButton.classList.add("button", "button-rounded");
 
-      back.appendChild(playButton);
-
-      inner.appendChild(front);
-      inner.appendChild(back);
-
-      button.appendChild(inner);
-
-      this.appendChild(button);
+      this.appendChild(card);
     });
   }
 }
