@@ -57,43 +57,11 @@ class ImageContainer extends HTMLElement {
 
     const puzzleSolvedEvent = new CustomEvent("puzzle-solved");
     this.dispatchEvent(puzzleSolvedEvent);
-
-    this.flip(400, 1000);
   }
 
-  flip(duration, delay, callback) {
-    const inner = this.querySelector(".pieces-container-inner");
-
-    if (!inner) {
-      return;
-    }
-
-    const animation = inner.animate(
-      [
-        {
-          transform: "none",
-        },
-
-        {
-          transform: "rotateY(180deg)",
-        },
-      ],
-      { duration, delay, iterations: 1, fill: "forwards" }
-    );
-
-    animation.addEventListener("finish", () => {
-      callback && callback();
-    });
-
-    return animation;
-  }
-
-  displayResult({ time }) {
-    const back = this.querySelector(".pieces-container-back");
-
-    if (!back) {
-      return;
-    }
+  displayResult({ time }, callback) {
+    const overlay = document.createElement("div");
+    overlay.classList.add("pieces-container-overlay");
 
     const finished = document.createElement("div");
     finished.classList.add("pieces-container-finished");
@@ -103,26 +71,35 @@ class ImageContainer extends HTMLElement {
     score.classList.add("pieces-container-score");
     score.appendChild(document.createTextNode(time));
 
-    back.appendChild(finished);
-    back.appendChild(score);
+    overlay.appendChild(finished);
+    overlay.appendChild(score);
+
+    this.appendChild(overlay);
+
+    const animation = overlay.animate(
+      [
+        {
+          opacity: 1,
+        },
+      ],
+      {
+        duration: 300,
+        delay: 300,
+        iterations: 1,
+        fill: "forwards",
+        easing: "ease-out",
+      }
+    );
+
+    animation.addEventListener("finish", () => {
+      callback && callback();
+    });
+
+    return animation;
   }
 
   connectedCallback() {
     const image = new Image();
-
-    const inner = document.createElement("div");
-    inner.classList.add("pieces-container-inner");
-
-    const front = document.createElement("div");
-    front.classList.add("pieces-container-front");
-
-    const back = document.createElement("div");
-    back.classList.add("pieces-container-back");
-
-    inner.appendChild(front);
-    inner.appendChild(back);
-
-    this.appendChild(inner);
 
     image.onload = () => {
       const maxWidth = Number.parseFloat(this.getAttribute("max-width"));
@@ -162,7 +139,7 @@ class ImageContainer extends HTMLElement {
           randomIndex,
         });
 
-        front.appendChild(piece);
+        this.appendChild(piece);
         piece.move(300, 1000, () => {
           numberOfPiecesDoneSuffling++;
 
