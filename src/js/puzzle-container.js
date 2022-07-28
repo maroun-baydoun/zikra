@@ -2,6 +2,7 @@ import { addImageContainer } from "./image-container.js";
 import { addTimer, formatSeconds } from "./timer.js";
 import { addBackArrow } from "./back-arrow";
 import { addLoader } from "./loader.js";
+import { setImageScore } from "./score/score-manager.js";
 
 class PuzzleContainer extends HTMLElement {
   connectedCallback() {
@@ -26,6 +27,7 @@ class PuzzleContainer extends HTMLElement {
     imageContainer.addEventListener("puzzle-solved", () => {
       gameTimer.stop();
       gameTimer.fadeOut(300, 200);
+      setImageScore(imageId, gameTimer.seconds);
       imageContainer.displayResult({
         time: formatSeconds()(gameTimer.seconds),
       });

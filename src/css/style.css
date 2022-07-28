@@ -221,13 +221,28 @@ image-selector {
   transition: 0.5s opacity ease-out;
   transform: translateY(100%);
 
+  gap: var(--spacing);
   padding: var(--spacing);
+  color: var(--color-off-white);
 }
 
 .image-card:hover .image-card-overlay,
 .image-card:focus-within .image-card-overlay {
   transform: translateY(0);
   opacity: 1;
+}
+
+.image-card-best-score {
+  margin-top: auto;
+
+  font-size: var(--font-size-l);
+  font-family: var(--font-family-sans-serif);
+}
+
+.image-card-score {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-monospace);
 }
 
 .image-card-overlay .button {
