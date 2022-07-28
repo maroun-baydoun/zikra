@@ -59,7 +59,9 @@ class ImageContainer extends HTMLElement {
     this.dispatchEvent(puzzleSolvedEvent);
   }
 
-  displayResult({ time }, callback) {
+  displayResult({ time, bestTime }, callback) {
+    const isNewBestTime = !!bestTime && time < bestTime;
+
     const overlay = document.createElement("div");
     overlay.classList.add("pieces-container-overlay");
 
@@ -73,6 +75,23 @@ class ImageContainer extends HTMLElement {
 
     overlay.appendChild(finished);
     overlay.appendChild(score);
+
+    if (bestTime) {
+      const finished = document.createElement("div");
+      finished.classList.add("pieces-container-finished");
+      finished.appendChild(
+        document.createTextNode(
+          !isNewBestTime ? "Your best time:" : "Your previous best time:"
+        )
+      );
+
+      const score = document.createElement("div");
+      score.classList.add("pieces-container-score");
+      score.appendChild(document.createTextNode(bestTime));
+
+      overlay.appendChild(finished);
+      overlay.appendChild(score);
+    }
 
     this.appendChild(overlay);
 

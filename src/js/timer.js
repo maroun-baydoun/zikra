@@ -5,6 +5,9 @@ export const formatSeconds = () => {
   });
 
   return (seconds) => {
+    if (typeof seconds === "undefined") {
+      return "";
+    }
     const date = new Date(seconds * 1000);
 
     return dateTimeFormat.format(date);
