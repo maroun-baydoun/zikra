@@ -37,13 +37,17 @@ const convertToWebp = () => {
             `${imageFileName}.webp`
           );
 
-          sharp(imagePath)
-            .resize(600, 900)
-            .toFile(webpFilePath, (error) => {
-              if (error) {
-                throw error;
-              }
-            });
+          const sharpImage = sharp(imagePath);
+
+          sharpImage.metadata().then(({ width, height }) => {
+            sharpImage
+              .resize(Math.min(width, 600), Math.min(height, 900))
+              .toFile(webpFilePath, (error) => {
+                if (error) {
+                  throw error;
+                }
+              });
+          });
         });
       });
     });
