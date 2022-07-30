@@ -129,6 +129,12 @@ class ImageContainer extends HTMLElement {
       this.style.setProperty("--width", `${image.width}px`);
       this.style.setProperty("--height", `${image.height}px`);
 
+      const imageLoadedEvent = new CustomEvent("image-loaded", {
+        detail: { width: image.width, height: image.height },
+      });
+
+      this.dispatchEvent(imageLoadedEvent);
+
       const getPieceDimensionsFn = getPieceDimensions(4);
 
       const [width, height] = getPieceDimensionsFn(image.width, image.height);
@@ -171,9 +177,6 @@ class ImageContainer extends HTMLElement {
           }
         });
       }
-
-      const imageLoadedEvent = new CustomEvent("image-loaded");
-      this.dispatchEvent(imageLoadedEvent);
     };
 
     const imageId = this.getAttribute("image-id");

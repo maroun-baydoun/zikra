@@ -16,7 +16,14 @@ class PuzzleContainer extends HTMLElement {
 
     const imageContainer = addImageContainer({ imageId }, this);
 
-    imageContainer.addEventListener("image-loaded", () => {
+    imageContainer.addEventListener("image-loaded", (e) => {
+      const { width, height } = e.detail;
+
+      this.style.setProperty("--width", `${width}px`);
+      this.style.setProperty("--height", `${height}px`);
+
+      this.setAttribute("loaded", "");
+
       loader.remove();
     });
 
