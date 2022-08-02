@@ -9,8 +9,13 @@ template.innerHTML = `
 a {
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
-
   color: inherit;
+  flex:1;
+  padding: var(--spacing) calc(var(--spacing) * 1.5);
+}
+
+a:focus {
+  outline: 0;
 }
 </style>
 <a>

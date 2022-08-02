@@ -69,13 +69,19 @@ button {
   max-width: 250px;
   cursor: pointer;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   font-size: var(--font-size-l);
   font-weight: var(--font-weight-bold);
   font-family: var(--font-family-sans-serif);
-  padding: var(--spacing) calc(var(--spacing) * 1.5);
   color: var(--color-black);
   background-color: var(--color-off-white);
+}
+
+.button:focus {
+  border: 3px solid var(--color-outline);
 }
 
 .button-rounded {
@@ -84,6 +90,10 @@ button {
 
 .button-full-width {
   max-width: unset;
+}
+
+.button-padded {
+  padding: var(--spacing) calc(var(--spacing) * 1.5);
 }
 
 a.button {

@@ -1,5 +1,6 @@
 import { shuffleArray } from "./array.js";
 import { resizeImage } from "./image.js";
+import { addLink } from "./link.js";
 import { makePiece, getPieceDimensions } from "./piece.js";
 
 class ImageContainer extends HTMLElement {
@@ -60,6 +61,7 @@ class ImageContainer extends HTMLElement {
   }
 
   displayResult({ time, bestTime }, callback) {
+    const imageId = this.getAttribute("image-id");
     const isNewBestTime = !!bestTime && time < bestTime;
 
     const overlay = document.createElement("div");
@@ -92,6 +94,12 @@ class ImageContainer extends HTMLElement {
       overlay.appendChild(finished);
       overlay.appendChild(score);
     }
+
+    const playAgainButton = addLink(overlay, {
+      child: document.createTextNode("Try again!"),
+      href: `/image/${imageId}`,
+    });
+    playAgainButton.classList.add("button", "button-rounded");
 
     this.appendChild(overlay);
 
