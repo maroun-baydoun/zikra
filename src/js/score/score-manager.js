@@ -1,6 +1,12 @@
+import { getSettings, onSettingsUpdate } from "../settings/settings-manager.js";
+
 const VERSION = 1;
 
-const KEY = `za-scores-v${VERSION}`;
+const key = () => {
+  const { difficulty } = getSettings();
+
+  return `za-scores-${difficulty}-v${VERSION}`;
+};
 
 const _initScoresState = () => {
   let scores = _getScoresFromLocalStorage();
@@ -21,13 +27,13 @@ const _setImageScore = (scoresState) => (imageId, score) => {
 
   const scores = { ...existingScores, [imageId]: score };
 
-  window.localStorage.setItem(KEY, JSON.stringify(scores));
+  window.localStorage.setItem(key(), JSON.stringify(scores));
 
   setScores(scores);
 };
 
 const _getScoresFromLocalStorage = () => {
-  const scoresAsString = window.localStorage.getItem(KEY);
+  const scoresAsString = window.localStorage.getItem(key());
 
   if (!scoresAsString) {
     return {};
@@ -38,13 +44,21 @@ const _getScoresFromLocalStorage = () => {
 
 const _scoresManager = () => {
   const state = _initScoresState();
+  const [, setScores] = state();
 
   return {
     getImageScore: _getImageScore(state),
     setImageScore: _setImageScore(state),
+    setScores,
   };
 };
 
-const { getImageScore, setImageScore } = _scoresManager();
+const { getImageScore, setImageScore, setScores } = _scoresManager();
+
+onSettingsUpdate(() => {
+  let scores = _getScoresFromLocalStorage();
+
+  setScores(scores);
+});
 
 export { getImageScore, setImageScore };

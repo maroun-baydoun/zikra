@@ -13,24 +13,29 @@ template.innerHTML = `
 
  svg {
     fill: var(--color-black);
-
  }
 </style>
-<za-link href="/images">
+<za-link>
 ${arrowLeftSvg}
 </za-link>
 `;
 
 class BackArrow extends HTMLElement {
   connectedCallback() {
+    const href = this.getAttribute("href");
+
     this.appendChild(template.content.cloneNode(true));
+
+    const link = this.querySelector("za-link");
+    link.setAttribute("href", href);
   }
 }
 
 window.customElements.define(BackArrowTagName, BackArrow);
 
-export const addBackArrow = (container) => {
+export const addBackArrow = (container, { href }) => {
   const backArrow = document.createElement(BackArrowTagName);
+  backArrow.setAttribute("href", href);
 
   container.appendChild(backArrow);
 

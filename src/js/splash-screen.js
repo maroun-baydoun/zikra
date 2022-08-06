@@ -9,9 +9,11 @@ template.innerHTML = `
 </header>
 
 <main class="container">
- <za-link href="/images" class="button button-rounded">Start</za-link>
-</main>
-`;
+  <div class="buttons-menu">
+    <za-link href="/images" class="button button-rounded">Start</za-link>
+    <za-link href="/settings" class="button button-rounded">Settings</za-link>
+  </div>
+</main>`;
 
 class SplashScreen extends HTMLElement {
   connectedCallback() {

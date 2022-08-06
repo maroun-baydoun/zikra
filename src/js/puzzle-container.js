@@ -8,7 +8,7 @@ class PuzzleContainer extends HTMLElement {
   connectedCallback() {
     const imageId = this.getAttribute("image-id");
 
-    const backArrow = addBackArrow(this);
+    const backArrow = addBackArrow(this, { href: "/images" });
 
     const gameTimer = addTimer(this);
 

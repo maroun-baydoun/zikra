@@ -1,11 +1,13 @@
 import { configureRouter } from "./location.js";
 
 import { addSplashScreen } from "./splash-screen.js";
+import { addSettingsScreen } from "./settings-screen.js";
 import { displayImageSelector } from "./image-selector.js";
 import { addPuzzleContainer } from "./puzzle-container";
 
 export const ROUTES = [
   { name: "home", path: "/" },
+  { name: "settings", path: "/settings" },
   { name: "images", path: "/images" },
   {
     name: "image",
@@ -21,6 +23,8 @@ export const goTo = configureRouter(ROUTES)(
 
     if (routeName === "home") {
       addSplashScreen(body);
+    } else if (routeName === "settings") {
+      addSettingsScreen(body);
     } else if (routeName === "images") {
       const container = addContainer(body);
       displayImageSelector(container);

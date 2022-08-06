@@ -2,6 +2,7 @@ import { shuffleArray } from "./array.js";
 import { resizeImage } from "./image.js";
 import { addLink } from "./link.js";
 import { makePiece, getPieceDimensions } from "./piece.js";
+import { getSettings } from "./settings/settings-manager.js";
 
 class ImageContainer extends HTMLElement {
   constructor() {
@@ -125,7 +126,24 @@ class ImageContainer extends HTMLElement {
     return animation;
   }
 
+  getComplexity(difficulty) {
+    switch (difficulty) {
+      case "easy":
+        return 4;
+      case "medium":
+        return 6;
+      case "hard":
+        return 8;
+      default:
+        return 4;
+    }
+  }
+
   connectedCallback() {
+    const { difficulty } = getSettings();
+
+    const complexity = this.getComplexity(difficulty);
+
     const image = new Image();
 
     image.onload = () => {
@@ -143,7 +161,7 @@ class ImageContainer extends HTMLElement {
 
       this.dispatchEvent(imageLoadedEvent);
 
-      const getPieceDimensionsFn = getPieceDimensions(4);
+      const getPieceDimensionsFn = getPieceDimensions(complexity);
 
       const [width, height] = getPieceDimensionsFn(image.width, image.height);
 
@@ -153,10 +171,10 @@ class ImageContainer extends HTMLElement {
         src: backgroundImage,
       } = image;
 
-      const indices = [...Array(16).keys()];
+      const indices = [...Array(complexity * complexity).keys()];
       const randomIndices = shuffleArray([...indices]);
 
-      const makePieceForGridComplexity = makePiece(4);
+      const makePieceForGridComplexity = makePiece(complexity);
 
       let numberOfPiecesDoneSuffling = 0;
 
@@ -176,7 +194,7 @@ class ImageContainer extends HTMLElement {
         piece.move(300, 1000, () => {
           numberOfPiecesDoneSuffling++;
 
-          if (numberOfPiecesDoneSuffling === 16) {
+          if (numberOfPiecesDoneSuffling === complexity * complexity) {
             const shuffleDoneEvent = new CustomEvent("shuffle-done");
             this.dispatchEvent(shuffleDoneEvent);
 
