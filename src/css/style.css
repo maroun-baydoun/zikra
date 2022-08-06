@@ -212,13 +212,13 @@ header h1 {
   text-align: center;
 
   max-width: var(--max-width);
-  font-size: calc(var(--font-size-xl) * 2);
+  font-size: calc(var(--font-size-xl) * 3);
 }
 
 header h2 {
   flex: 1;
 
-  font-size: var(--font-size-m);
+  font-size: var(--font-size-l);
 }
 
 .container {
