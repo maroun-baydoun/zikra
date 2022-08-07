@@ -217,8 +217,19 @@ header h1 {
 
 header h2 {
   flex: 1;
+  white-space: pre;
+  animation: h2-animate 3s ease-out 2s infinite alternate forwards;
 
   font-size: var(--font-size-l);
+}
+
+@keyframes h2-animate {
+  from {
+    word-spacing: -0.5rem;
+  }
+  to {
+    word-spacing: 0.5rem;
+  }
 }
 
 .container {
