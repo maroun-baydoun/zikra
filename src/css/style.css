@@ -72,6 +72,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.5s ease-out;
 
   font-size: var(--font-size-l);
   font-weight: var(--font-weight-bold);
@@ -80,8 +81,9 @@ button {
   background-color: var(--color-off-white);
 }
 
-.button:focus {
-  border: 3px solid var(--color-outline);
+.button:focus,
+.button:hover {
+  background-color: var(--color-white);
 }
 
 .button-rounded {
