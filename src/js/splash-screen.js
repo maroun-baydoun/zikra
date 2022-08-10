@@ -10,8 +10,8 @@ template.innerHTML = `
 
 <main class="container">
   <div class="buttons-menu">
-    <za-link href="/images" class="button button-rounded">Start</za-link>
-    <za-link href="/settings" class="button button-rounded">Settings</za-link>
+    <za-link href="/images" class="button button-rounded" padded>Start</za-link>
+    <za-link href="/settings" class="button button-rounded" padded>Settings</za-link>
   </div>
 </main>`;
 

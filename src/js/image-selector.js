@@ -58,6 +58,7 @@ class ImageSelector extends HTMLElement {
       const playButton = addLink(overlay, {
         child: document.createTextNode("Play!"),
         href: `/image/${imageId}`,
+        padded: true,
       });
       playButton.classList.add("button", "button-rounded");
 

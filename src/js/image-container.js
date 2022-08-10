@@ -99,6 +99,7 @@ class ImageContainer extends HTMLElement {
     const playAgainButton = addLink(overlay, {
       child: document.createTextNode("Try again!"),
       href: `/image/${imageId}`,
+      padded: true,
     });
     playAgainButton.classList.add("button", "button-rounded");
 

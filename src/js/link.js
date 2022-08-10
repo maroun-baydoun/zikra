@@ -11,6 +11,9 @@ a {
   -webkit-tap-highlight-color: transparent;
   color: inherit;
   flex:1;
+}
+
+:host([padded]) a {
   padding: var(--spacing) calc(var(--spacing) * 1.5);
 }
 
@@ -58,9 +61,10 @@ export const register = () => {
   window.customElements.define(LinkTagName, Link);
 };
 
-export const addLink = (container, { child, href }) => {
+export const addLink = (container, { child, href, padded }) => {
   const link = document.createElement(LinkTagName);
   link.setAttribute("href", href);
+  padded && link.setAttribute("padded", true);
   link.appendChild(child);
 
   container.appendChild(link);
