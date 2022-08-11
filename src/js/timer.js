@@ -59,6 +59,14 @@ class Timer extends HTMLElement {
     window.cancelAnimationFrame(this.animationHandler);
   }
 
+  pause() {
+    if (this.animationHandler === null) {
+      return;
+    }
+
+    window.cancelAnimationFrame(this.animationHandler);
+  }
+
   displayTime() {
     this.innerHTML = this.format(this.seconds);
   }

@@ -234,6 +234,30 @@ header h2 {
   }
 }
 
+.mask {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+
+  gap: var(--spacing);
+}
+
+.mask-text {
+  user-select: none;
+
+  color: var(--color-off-white);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
 .container {
   flex: 1;
   width: 100%;
@@ -251,11 +275,11 @@ puzzle-container {
   width: 100%;
   display: grid;
   grid-template-rows: 50px 75px 1fr;
-  grid-template-columns: var(--width);
+  grid-template-columns: 1fr 1fr;
   grid-template-areas:
-    "back"
-    "timer"
-    "image";
+    "back pause"
+    "timer timer"
+    "image image";
   justify-content: center;
 }
 
@@ -281,6 +305,16 @@ puzzle-container[loaded] za-back-arrow {
   puzzle-container za-back-arrow {
     align-self: flex-start;
   }
+}
+
+puzzle-container za-pause-button {
+  grid-area: pause;
+  justify-self: flex-end;
+  display: none;
+}
+
+puzzle-container[started] za-pause-button {
+  display: initial;
 }
 
 image-selector {

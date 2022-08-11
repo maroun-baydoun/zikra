@@ -1,6 +1,7 @@
 import { addImageContainer } from "./image-container.js";
 import { addTimer, formatSeconds } from "./timer.js";
 import { addBackArrow } from "./back-arrow";
+import { addPauseButton } from "./pause-button";
 import { addLoader } from "./loader.js";
 import { setImageScore, getImageScore } from "./score/score-manager.js";
 
@@ -10,11 +11,38 @@ class PuzzleContainer extends HTMLElement {
 
     const backArrow = addBackArrow(this, { href: "/images" });
 
+    const pauseButton = addPauseButton(this);
+
     const gameTimer = addTimer(this);
 
     const loader = addLoader(this);
 
     const imageContainer = addImageContainer({ imageId }, this);
+
+    pauseButton.addEventListener("click", () => {
+      const mask = document.createElement("div");
+      mask.classList.add("mask");
+
+      const paused = document.createElement("div");
+      paused.classList.add("mask-text");
+      paused.appendChild(document.createTextNode("Paused"));
+
+      const resumeButton = document.createElement("button");
+      resumeButton.classList.add("button", "button-rounded", "button-padded");
+      resumeButton.appendChild(document.createTextNode("Continue"));
+
+      resumeButton.addEventListener("click", () => {
+        mask.remove();
+        gameTimer.start();
+      });
+
+      mask.appendChild(paused);
+      mask.appendChild(resumeButton);
+
+      document.body.appendChild(mask);
+
+      gameTimer.stop();
+    });
 
     imageContainer.addEventListener("image-loaded", (e) => {
       const { width, height } = e.detail;
@@ -29,6 +57,7 @@ class PuzzleContainer extends HTMLElement {
 
     imageContainer.addEventListener("shuffle-done", () => {
       gameTimer.start();
+      this.setAttribute("started", "");
     });
 
     imageContainer.addEventListener("puzzle-solved", () => {
