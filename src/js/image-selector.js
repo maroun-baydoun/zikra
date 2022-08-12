@@ -2,10 +2,18 @@ import { IMAGE_IDS } from "./image-ids.js";
 import { addLink } from "./link.js";
 import { formatSeconds } from "./timer";
 import { getImageScore } from "./score/score-manager.js";
+import { addBackArrow } from "./back-arrow";
 
 class ImageSelector extends HTMLElement {
   connectedCallback() {
     const secondsFormatter = formatSeconds();
+
+    addBackArrow(this, { href: "/" });
+
+    const imagesGrid = document.createElement("div");
+    imagesGrid.classList.add("images-grid");
+
+    this.appendChild(imagesGrid);
 
     IMAGE_IDS.forEach((imageId) => {
       const card = document.createElement("div");
@@ -66,7 +74,7 @@ class ImageSelector extends HTMLElement {
       });
       playButton.classList.add("button", "button-rounded");
 
-      this.appendChild(card);
+      imagesGrid.appendChild(card);
     });
   }
 }
