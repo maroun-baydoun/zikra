@@ -24,8 +24,6 @@ class Timer extends HTMLElement {
     this.format = formatSeconds();
   }
 
-  connectedCallback() {}
-
   disconnectedCallback() {
     this.stop();
   }
@@ -59,16 +57,36 @@ class Timer extends HTMLElement {
     window.cancelAnimationFrame(this.animationHandler);
   }
 
-  pause() {
-    if (this.animationHandler === null) {
-      return;
-    }
+  reset() {
+    this.stop();
 
-    window.cancelAnimationFrame(this.animationHandler);
+    this.seconds = 0;
+    this.displayTime();
   }
 
   displayTime() {
     this.innerHTML = this.format(this.seconds);
+  }
+
+  fadeIn(duration, delay, callback) {
+    const animation = this.animate(
+      [
+        {
+          opacity: 0,
+        },
+
+        {
+          opacity: 1,
+        },
+      ],
+      { duration, delay, iterations: 1, fill: "forwards" }
+    );
+
+    animation.addEventListener("finish", () => {
+      callback && callback();
+    });
+
+    return animation;
   }
 
   fadeOut(duration, delay, callback) {
@@ -87,7 +105,6 @@ class Timer extends HTMLElement {
 
     animation.addEventListener("finish", () => {
       callback && callback();
-      this.remove();
     });
 
     return animation;

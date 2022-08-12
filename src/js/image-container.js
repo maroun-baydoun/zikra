@@ -96,12 +96,16 @@ class ImageContainer extends HTMLElement {
       overlay.appendChild(score);
     }
 
-    const playAgainButton = addLink(overlay, {
-      child: document.createTextNode("Try again!"),
-      href: `/image/${imageId}`,
-      padded: true,
+    const playAgainButton = document.createElement("button");
+    playAgainButton.classList.add("button", "button-rounded", "button-padded");
+    playAgainButton.appendChild(document.createTextNode("Try again!"));
+
+    playAgainButton.addEventListener("click", () => {
+      const playAgainEvent = new CustomEvent("play-again");
+      this.dispatchEvent(playAgainEvent);
     });
-    playAgainButton.classList.add("button", "button-rounded");
+
+    overlay.appendChild(playAgainButton);
 
     this.appendChild(overlay);
 

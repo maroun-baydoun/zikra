@@ -6,20 +6,64 @@ import { addLoader } from "./loader.js";
 import { setImageScore, getImageScore } from "./score/score-manager.js";
 
 class PuzzleContainer extends HTMLElement {
-  connectedCallback() {
+  displayImageContainer() {
     const imageId = this.getAttribute("image-id");
 
-    const backArrow = addBackArrow(this, { href: "/images" });
+    this.imageContainer = addImageContainer({ imageId }, this);
 
-    const pauseButton = addPauseButton(this);
+    this.imageContainer.addEventListener("image-loaded", (e) => {
+      const { width, height } = e.detail;
 
-    const gameTimer = addTimer(this);
+      this.style.setProperty("--width", `${width}px`);
+      this.style.setProperty("--height", `${height}px`);
 
-    const loader = addLoader(this);
+      this.setAttribute("loaded", "");
 
-    const imageContainer = addImageContainer({ imageId }, this);
+      this.loader.remove();
+    });
 
-    pauseButton.addEventListener("click", () => {
+    this.imageContainer.addEventListener("shuffle-done", () => {
+      this.gameTimer.start();
+      this.setAttribute("started", "");
+    });
+
+    this.imageContainer.addEventListener("puzzle-solved", () => {
+      this.gameTimer.stop();
+      this.gameTimer.fadeOut(300, 200);
+
+      const bestTime = getImageScore(imageId);
+      if (!bestTime || this.gameTimer.seconds < bestTime) {
+        setImageScore(imageId, this.gameTimer.seconds);
+      }
+
+      const secondsFormatter = formatSeconds();
+
+      this.imageContainer.displayResult({
+        time: secondsFormatter(this.gameTimer.seconds),
+        bestTime: secondsFormatter(bestTime),
+      });
+    });
+
+    this.imageContainer.addEventListener("play-again", () => {
+      this.gameTimer.reset();
+      this.gameTimer.fadeIn(300, 200);
+
+      this.imageContainer.remove();
+
+      this.displayImageContainer();
+    });
+  }
+
+  connectedCallback() {
+    this.backArrow = addBackArrow(this, { href: "/images" });
+
+    this.pauseButton = addPauseButton(this);
+
+    this.gameTimer = addTimer(this);
+
+    this.loader = addLoader(this);
+
+    this.pauseButton.addEventListener("click", () => {
       const mask = document.createElement("div");
       mask.classList.add("mask");
 
@@ -33,7 +77,7 @@ class PuzzleContainer extends HTMLElement {
 
       resumeButton.addEventListener("click", () => {
         mask.remove();
-        gameTimer.start();
+        this.gameTimer.start();
       });
 
       mask.appendChild(paused);
@@ -41,41 +85,10 @@ class PuzzleContainer extends HTMLElement {
 
       document.body.appendChild(mask);
 
-      gameTimer.stop();
+      this.gameTimer.stop();
     });
 
-    imageContainer.addEventListener("image-loaded", (e) => {
-      const { width, height } = e.detail;
-
-      this.style.setProperty("--width", `${width}px`);
-      this.style.setProperty("--height", `${height}px`);
-
-      this.setAttribute("loaded", "");
-
-      loader.remove();
-    });
-
-    imageContainer.addEventListener("shuffle-done", () => {
-      gameTimer.start();
-      this.setAttribute("started", "");
-    });
-
-    imageContainer.addEventListener("puzzle-solved", () => {
-      gameTimer.stop();
-      gameTimer.fadeOut(300, 200);
-
-      const bestTime = getImageScore(imageId);
-      if (!bestTime || gameTimer.seconds < bestTime) {
-        setImageScore(imageId, gameTimer.seconds);
-      }
-
-      const secondsFormatter = formatSeconds();
-
-      imageContainer.displayResult({
-        time: secondsFormatter(gameTimer.seconds),
-        bestTime: secondsFormatter(bestTime),
-      });
-    });
+    this.displayImageContainer();
   }
 }
 
