@@ -16,6 +16,7 @@
   --font-weight-bold: bold;
 
   --color-black: #111;
+  --color-black-light: #333;
   --color-white: #fff;
   --color-off-white: #eee;
   --color-outline: #ffaa33;
@@ -346,7 +347,28 @@ image-selector {
   overflow: hidden;
   transition: 0.2s all ease-out;
 
-  background: var(--color-black);
+  background-color: var(--color-black);
+}
+
+.image-card:not([image-loaded]) {
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    90deg,
+    var(--color-black) 0%,
+    var(--color-black-light) 50%,
+    var(--color-black) 100%
+  );
+
+  animation: image-card-load 1.5s ease-out 0s infinite alternate forwards;
+}
+
+@keyframes image-card-load {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 .image-card:focus,
@@ -355,11 +377,6 @@ image-selector {
   transform: translateY(-3px);
 
   box-shadow: 0 5px 10px var(--box-shadow-color);
-}
-
-.image-card:focus-within .image-card-front,
-.image-card:focus-within .image-card-back {
-  outline: 3px solid var(--color-outline);
 }
 
 .image-card-overlay {
@@ -382,20 +399,23 @@ image-selector {
   color: var(--color-off-white);
 }
 
-.image-card:hover .image-card-overlay,
-.image-card:focus-within .image-card-overlay {
+.image-card[image-loaded]:hover .image-card-overlay,
+.image-card[image-loaded]:focus-within .image-card-overlay {
   transform: translateY(0);
   opacity: 1;
 }
 
 .image-card-best-score {
   margin-top: auto;
+  user-select: none;
 
   font-size: var(--font-size-l);
   font-family: var(--font-family-sans-serif);
 }
 
 .image-card-score {
+  user-select: none;
+
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   font-family: var(--font-family-monospace);

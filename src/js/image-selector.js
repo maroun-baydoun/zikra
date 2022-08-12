@@ -15,11 +15,15 @@ class ImageSelector extends HTMLElement {
       image.loading = "lazy";
 
       image.onload = () => {
-        image.animate([{ opacity: 1 }], {
-          duration: 200,
-          fill: "forwards",
-          easing: "ease-out",
-        });
+        image
+          .animate([{ opacity: 1 }], {
+            duration: 200,
+            fill: "forwards",
+            easing: "ease-out",
+          })
+          .addEventListener("finish", () => {
+            card.setAttribute("image-loaded", "");
+          });
       };
 
       import(`../img/${imageId}/medium.webp`).then((src) => {
