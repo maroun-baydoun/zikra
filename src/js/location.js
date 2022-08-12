@@ -90,14 +90,17 @@ export const configureRouter = (routes) => (onRouteMatched, onNotFound) => {
   /**
    *
    * @param {string} url
+   * @param {{replace: boolean}} args
    * @returns
    */
-  const goTo = (url) => {
+  const goTo = (url, { replace = false } = {}) => {
     if (!window.history) {
       return;
     }
 
-    window.history.pushState({}, "", url);
+    replace
+      ? window.history.replaceState({}, "", url)
+      : window.history.pushState({}, "", url);
 
     const match = findMatchingRoute(compiledRoutes);
 
