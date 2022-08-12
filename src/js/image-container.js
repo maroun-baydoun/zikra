@@ -1,6 +1,5 @@
 import { shuffleArray } from "./array.js";
 import { resizeImage } from "./image.js";
-import { addLink } from "./link.js";
 import { makePiece, getPieceDimensions } from "./piece.js";
 import { getSettings } from "./settings/settings-manager.js";
 
@@ -13,8 +12,6 @@ class ImageContainer extends HTMLElement {
   }
 
   onSelected(event) {
-    event.preventDefault();
-
     const { target } = event;
 
     const piece = target.closest("image-piece");
@@ -22,6 +19,8 @@ class ImageContainer extends HTMLElement {
     if (!piece) {
       return;
     }
+
+    event.preventDefault();
 
     if (!this.firstSelectedPiece) {
       this.firstSelectedPiece = piece;
