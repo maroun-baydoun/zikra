@@ -5,20 +5,19 @@ export const BackArrowTagName = "za-back-arrow";
 const template = document.createElement("template");
 
 template.innerHTML = `
-<style>
- za-link {
-    display: inline-block;
-    width:35px;
-  }
+  <style>
+    za-link {
+        display: inline-block;
+        width:35px;
+      }
 
- svg {
-    fill: var(--color-black);
- }
-</style>
-<za-link>
-${arrowLeftSvg}
-</za-link>
-`;
+    svg {
+        fill: var(--color-black);
+    }
+  </style>
+  <za-link>
+  ${arrowLeftSvg}
+  </za-link>`;
 
 class BackArrow extends HTMLElement {
   connectedCallback() {
@@ -31,7 +30,9 @@ class BackArrow extends HTMLElement {
   }
 }
 
-window.customElements.define(BackArrowTagName, BackArrow);
+export const register = () => {
+  window.customElements.define(BackArrowTagName, BackArrow);
+};
 
 export const addBackArrow = (container, { href }) => {
   const backArrow = document.createElement(BackArrowTagName);

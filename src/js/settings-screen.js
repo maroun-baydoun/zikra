@@ -1,4 +1,3 @@
-import { addBackArrow } from "./back-arrow.js";
 import { getSettings, setSettings } from "./settings/settings-manager.js";
 import { goTo } from "./router";
 
@@ -7,6 +6,7 @@ export const SettingsScreenTagName = "za-settings-screen";
 const template = document.createElement("template");
 
 template.innerHTML = `
+  <za-back-arrow href="/"></za-back-arrow>
   <form class="settings-form">
     <fieldset class="settings-section">
       <legend>Difficulty</legend>
@@ -25,7 +25,7 @@ template.innerHTML = `
         </div>
       </div>
     </fieldset>
-    <button class="button button-rounded button-padded">Save</button>
+    <button class="button button-dark button-rounded button-padded">Save</button>
   </form>`;
 
 class SettingsScreen extends HTMLElement {

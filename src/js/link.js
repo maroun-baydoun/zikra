@@ -5,26 +5,25 @@ export const LinkTagName = "za-link";
 const template = document.createElement("template");
 
 template.innerHTML = `
-<style>
-a {
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-  color: inherit;
-  flex:1;
-}
+  <style>
+    a {
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+      color: inherit;
+      flex:1;
+    }
 
-:host([padded]) a {
-  padding: var(--spacing) calc(var(--spacing) * 1.5);
-}
+    :host([padded]) a {
+      padding: var(--spacing) calc(var(--spacing) * 1.5);
+    }
 
-a:focus {
-  outline: 0;
-}
-</style>
-<a>
-<slot></slot>
-</a>
-`;
+    a:focus {
+      outline: 0;
+    }
+  </style>
+  <a>
+    <slot></slot>
+  </a>`;
 
 class Link extends HTMLElement {
   constructor() {
