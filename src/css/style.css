@@ -345,6 +345,10 @@ puzzle-container[started] za-pause-button {
   display: initial;
 }
 
+puzzle-container[solved] za-pause-button {
+  display: none;
+}
+
 image-selector {
   width: 100%;
   display: flex;

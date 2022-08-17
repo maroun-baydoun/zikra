@@ -31,6 +31,8 @@ class PuzzleContainer extends HTMLElement {
       this.gameTimer.stop();
       this.gameTimer.fadeOut(300, 200);
 
+      this.setAttribute("solved", "");
+
       const bestTime = getImageScore(imageId);
       if (!bestTime || this.gameTimer.seconds < bestTime) {
         setImageScore(imageId, this.gameTimer.seconds);
@@ -47,6 +49,9 @@ class PuzzleContainer extends HTMLElement {
     this.imageContainer.addEventListener("play-again", () => {
       this.gameTimer.reset();
       this.gameTimer.fadeIn(300, 200);
+
+      this.removeAttribute("started");
+      this.removeAttribute("solved");
 
       this.imageContainer.remove();
 
