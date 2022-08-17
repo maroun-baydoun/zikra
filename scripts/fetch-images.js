@@ -37,12 +37,29 @@ const done = (total) => {
 
 const downloadImages = (parsedResponse) => {
   const imagesDirectoryPath = path.resolve("src", "img");
+  const metadataFilePath = path.resolve("src", "img", "metadata.json");
 
-  const onDone = done(parseResponse.length)(() =>
+  const onDone = done(parsedResponse.length)(() =>
     fs.readdir(imagesDirectoryPath, (error, existingPhotoIds) => {
       if (error) {
         throw error;
       }
+
+      const metadata = parsedResponse.reduce(
+        (data, { id, title }) => ({ ...data, [id]: { title } }),
+        {}
+      );
+
+      fs.writeFile(
+        metadataFilePath,
+        JSON.stringify(metadata),
+        { encoding: "utf-8" },
+        (error) => {
+          if (error) {
+            throw error;
+          }
+        }
+      );
 
       const responsePhotoIds = parsedResponse.map((photo) => photo.id);
 

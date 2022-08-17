@@ -59,8 +59,6 @@ class SettingsScreen extends HTMLElement {
     if (difficultyRadio) {
       difficultyRadio.checked = true;
     }
-
-    addBackArrow(this, { href: "/" });
   }
 }
 

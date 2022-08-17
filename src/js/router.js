@@ -1,9 +1,12 @@
 import { configureRouter } from "./location.js";
+import { setTitle } from "./title";
 
 import { addSplashScreen } from "./splash-screen.js";
 import { addSettingsScreen } from "./settings-screen.js";
 import { displayImageSelector } from "./image-selector.js";
 import { addPuzzleContainer } from "./puzzle-container";
+
+import metada from "../img/metadata.json";
 
 export const ROUTES = [
   { name: "home", path: "/" },
@@ -22,14 +25,23 @@ export const goTo = configureRouter(ROUTES)(
     clearContainer(body);
 
     if (routeName === "home") {
+      setTitle("Zikra - Putting the pieces back together", false);
       addSplashScreen(body);
     } else if (routeName === "settings") {
+      setTitle("Settings");
       addSettingsScreen(body);
     } else if (routeName === "images") {
+      setTitle("Select an image");
       const container = addContainer(body);
       displayImageSelector(container);
     } else if (routeName === "image") {
       const { imageId } = parameters;
+
+      const imageMetadata = metada[imageId];
+
+      if (imageMetadata && imageMetadata.title) {
+        setTitle(imageMetadata.title);
+      }
 
       const container = addContainer(body);
       addPuzzleContainer(container, { imageId });
