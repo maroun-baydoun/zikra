@@ -304,6 +304,7 @@ puzzle-container {
     "back timer pause"
     "image image image";
   justify-content: center;
+  align-items: center;
 
   row-gap: var(--spacing);
 }

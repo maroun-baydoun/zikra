@@ -19,8 +19,7 @@ template.innerHTML = `
 </style>
 <button>
 ${pauseSvg}
-</button>
-`;
+</button>`;
 
 class PauseButton extends HTMLElement {
   constructor() {
