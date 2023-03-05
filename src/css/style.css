@@ -244,7 +244,6 @@ header h1 {
 header h2 {
   flex: 1;
   white-space: pre;
-  animation: h2-animate 3s ease-in-out 2s infinite alternate forwards;
 
   font-size: var(--font-size-l);
 }
