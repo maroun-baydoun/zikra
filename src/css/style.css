@@ -297,7 +297,7 @@ puzzle-container {
   flex: 1;
   width: 100%;
   display: grid;
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: min-content 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
     "back timer pause"
@@ -355,7 +355,6 @@ image-selector {
   flex-direction: column;
 
   gap: var(--spacing);
-  padding: 0 var(--spacing);
   margin-bottom: var(--spacing);
 }
 
