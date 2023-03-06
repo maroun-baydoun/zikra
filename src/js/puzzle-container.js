@@ -59,7 +59,14 @@ class PuzzleContainer extends HTMLElement {
     });
   }
 
+  onBeforeUnload(event) {
+    event.preventDefault();
+    return (event.returnValue = "");
+  }
+
   connectedCallback() {
+    window.addEventListener("beforeunload", this.onBeforeUnload);
+
     this.backArrow = addBackArrow(this, { href: "/images" });
 
     this.pauseButton = addPauseButton(this);
@@ -94,6 +101,10 @@ class PuzzleContainer extends HTMLElement {
     });
 
     this.displayImageContainer();
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener("beforeunload", this.onBeforeUnload);
   }
 }
 
