@@ -1,11 +1,19 @@
+import { Mediaq } from "mediaq";
 import { addImageContainer } from "./image-container.js";
 import { addTimer, formatSeconds } from "./timer.js";
 import { addBackArrow } from "./back-arrow";
 import { addPauseButton } from "./pause-button";
 import { addLoader } from "./loader.js";
 import { setImageScore, getImageScore } from "./score/score-manager.js";
+import { showMask } from "./mask.js";
 
 class PuzzleContainer extends HTMLElement {
+  constructor() {
+    super();
+
+    this.onMediaQueryMatchUpdate = this.onMediaQueryMatchUpdate.bind(this);
+  }
+
   displayImageContainer() {
     const imageId = this.getAttribute("image-id");
 
@@ -64,7 +72,31 @@ class PuzzleContainer extends HTMLElement {
     return (event.returnValue = "");
   }
 
+  onMediaQueryMatchUpdate({ name, matches }) {
+    if (name === "landscape") {
+      if (matches) {
+        const dismiss = showMask("Turn it to portrait");
+        this.dismissMask = dismiss;
+        this.gameTimer.stop();
+      } else {
+        if (this.dismissMask) {
+          this.dismissMask();
+        }
+      }
+    }
+  }
+
   connectedCallback() {
+    const mediaq = Mediaq({
+      onUpdate: this.onMediaQueryMatchUpdate,
+      mediaQueries: [
+        {
+          name: "landscape",
+          media: "(orientation: landscape)",
+        },
+      ],
+    });
+
     window.addEventListener("beforeunload", this.onBeforeUnload);
 
     this.backArrow = addBackArrow(this, { href: "/images" });
@@ -74,6 +106,8 @@ class PuzzleContainer extends HTMLElement {
     this.gameTimer = addTimer(this);
 
     this.loader = addLoader(this);
+
+    mediaq.start();
 
     this.pauseButton.addEventListener("click", () => {
       const mask = document.createElement("div");

@@ -24,6 +24,7 @@
     "vite": "4.1.4"
   },
   "dependencies": {
-    "evented-ts": "2.0.0"
+    "evented-ts": "2.0.0",
+    "mediaq": "2.0.0"
   }
 }

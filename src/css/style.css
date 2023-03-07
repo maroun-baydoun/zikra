@@ -56,6 +56,10 @@ body {
   font-family: var(--font-family-sans-serif);
 }
 
+body.masked {
+  overflow: hidden;
+}
+
 h1,
 h2,
 h3 {
