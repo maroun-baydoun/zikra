@@ -92,7 +92,8 @@ class PuzzleContainer extends HTMLElement {
       mediaQueries: [
         {
           name: "landscape",
-          media: "(orientation: landscape)",
+          media:
+            "screen and (max-device-width: 1024px) and (orientation: landscape)",
         },
       ],
     });
