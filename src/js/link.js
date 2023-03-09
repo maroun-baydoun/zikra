@@ -14,7 +14,7 @@ template.innerHTML = `
     }
 
     :host([padded]) a {
-      padding: var(--spacing) calc(var(--spacing) * 1.5);
+      padding: calc(var(--spacing) * 0.75) var(--spacing);
     }
 
     a:focus {
