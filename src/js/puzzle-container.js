@@ -1,7 +1,6 @@
 import { Mediaq } from "mediaq";
 import { addImageContainer } from "./image-container.js";
 import { addTimer, formatSeconds } from "./timer.js";
-import { addBackArrow } from "./back-arrow";
 import { addPauseButton } from "./pause-button";
 import { addLoader } from "./loader.js";
 import { setImageScore, getImageScore } from "./score/score-manager.js";
@@ -99,8 +98,6 @@ class PuzzleContainer extends HTMLElement {
     });
 
     window.addEventListener("beforeunload", this.onBeforeUnload);
-
-    this.backArrow = addBackArrow(this, { href: "/images" });
 
     this.pauseButton = addPauseButton(this);
 

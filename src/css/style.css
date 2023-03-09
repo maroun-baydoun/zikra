@@ -306,7 +306,7 @@ puzzle-container {
   grid-template-rows: min-content 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
-    "back timer pause"
+    "timer .  pause"
     "image image image";
   justify-content: center;
   align-items: center;
@@ -319,25 +319,9 @@ puzzle-container {
     grid-template-rows: 50px 50px 1fr;
     grid-template-columns: 1fr var(--width) 1fr;
     grid-template-areas:
-      "back image timer"
+      ". image timer"
       ". image pause"
       ". image .";
-  }
-}
-
-puzzle-container za-back-arrow {
-  grid-area: back;
-  align-self: center;
-  display: none;
-}
-
-puzzle-container[loaded] za-back-arrow {
-  display: initial;
-}
-
-@media screen and (min-width: 1024px) {
-  puzzle-container za-back-arrow {
-    align-self: flex-start;
   }
 }
 
@@ -579,7 +563,7 @@ game-timer:empty {
 puzzle-container game-timer {
   grid-area: timer;
   align-self: center;
-  justify-self: center;
+  justify-self: flex-start;
   display: none;
 }
 
