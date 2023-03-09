@@ -23,6 +23,7 @@
   --color-outline: #ffaa33;
 
   --border-radius: 25px;
+  --border-radius-small: 15px;
 
   --box-shadow-color: rgba(0, 0, 0, 0.2);
 
@@ -494,7 +495,8 @@ image-container {
   width: var(--width);
   height: var(--height);
   background-color: var(--color-black);
-  box-shadow: 0 5px 10px var(--box-shadow-color);
+  border: 3px solid var(--color-black);
+  border-radius: var(--border-radius-small);
 }
 
 .pieces-container-overlay {
