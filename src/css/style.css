@@ -567,7 +567,7 @@ puzzle-container game-timer {
   display: none;
 }
 
-puzzle-container[loaded] game-timer {
+puzzle-container[started] game-timer {
   display: initial;
 }
 

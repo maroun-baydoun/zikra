@@ -11,6 +11,7 @@ class PuzzleContainer extends HTMLElement {
     super();
 
     this.onMediaQueryMatchUpdate = this.onMediaQueryMatchUpdate.bind(this);
+    this.onPlayAgain = this.onPlayAgain.bind(this);
   }
 
   displayImageContainer() {
@@ -53,17 +54,18 @@ class PuzzleContainer extends HTMLElement {
       });
     });
 
-    this.imageContainer.addEventListener("play-again", () => {
-      this.gameTimer.reset();
-      this.gameTimer.fadeIn(300, 200);
+    this.imageContainer.addEventListener("play-again", this.onPlayAgain);
+  }
 
-      this.removeAttribute("started");
-      this.removeAttribute("solved");
+  onPlayAgain() {
+    this.gameTimer.reset();
 
-      this.imageContainer.remove();
+    this.removeAttribute("started");
+    this.removeAttribute("solved");
 
-      this.displayImageContainer();
-    });
+    this.imageContainer.remove();
+
+    this.displayImageContainer();
   }
 
   onBeforeUnload(event) {
@@ -128,8 +130,23 @@ class PuzzleContainer extends HTMLElement {
         this.gameTimer.start();
       });
 
+      const playAgainButton = document.createElement("button");
+      playAgainButton.classList.add(
+        "button",
+        "button-rounded",
+        "button-padded"
+      );
+      playAgainButton.appendChild(document.createTextNode("Try again!"));
+
+      playAgainButton.addEventListener("click", () => {
+        if (this.dismissMask) {
+          this.dismissMask();
+        }
+        this.onPlayAgain();
+      });
+
       try {
-        const dismiss = showMask([paused, resumeButton]);
+        const dismiss = showMask([paused, resumeButton, playAgainButton]);
         this.dismissMask = dismiss;
 
         this.gameTimer.stop();
