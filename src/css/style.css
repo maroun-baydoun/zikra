@@ -276,7 +276,7 @@ header h2 {
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 9999;
 
-  gap: var(--spacing);
+  gap: calc(var(--spacing) * 3);
 }
 
 .mask-text {
@@ -303,7 +303,7 @@ puzzle-container {
   flex: 1;
   width: 100%;
   display: grid;
-  grid-template-rows: min-content 1fr;
+  grid-template-rows: 50px 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
     "timer .  pause"

@@ -74,9 +74,14 @@ class PuzzleContainer extends HTMLElement {
   onMediaQueryMatchUpdate({ name, matches }) {
     if (name === "landscape") {
       if (matches) {
-        const dismiss = showMask("Turn it to portrait");
-        this.dismissMask = dismiss;
-        this.gameTimer.stop();
+        const turn = document.createElement("div");
+        turn.classList.add("mask-text");
+        turn.appendChild(document.createTextNode("Turn it to portrait"));
+        try {
+          const dismiss = showMask([turn]);
+          this.dismissMask = dismiss;
+          this.gameTimer.stop();
+        } catch {}
       } else {
         if (this.dismissMask) {
           this.dismissMask();
@@ -108,9 +113,6 @@ class PuzzleContainer extends HTMLElement {
     mediaq.start();
 
     this.pauseButton.addEventListener("click", () => {
-      const mask = document.createElement("div");
-      mask.classList.add("mask");
-
       const paused = document.createElement("div");
       paused.classList.add("mask-text");
       paused.appendChild(document.createTextNode("Paused"));
@@ -120,16 +122,18 @@ class PuzzleContainer extends HTMLElement {
       resumeButton.appendChild(document.createTextNode("Continue"));
 
       resumeButton.addEventListener("click", () => {
-        mask.remove();
+        if (this.dismissMask) {
+          this.dismissMask();
+        }
         this.gameTimer.start();
       });
 
-      mask.appendChild(paused);
-      mask.appendChild(resumeButton);
+      try {
+        const dismiss = showMask([paused, resumeButton]);
+        this.dismissMask = dismiss;
 
-      document.body.appendChild(mask);
-
-      this.gameTimer.stop();
+        this.gameTimer.stop();
+      } catch {}
     });
 
     this.displayImageContainer();
