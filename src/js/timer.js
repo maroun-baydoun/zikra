@@ -67,48 +67,6 @@ class Timer extends HTMLElement {
   displayTime() {
     this.innerHTML = this.format(this.seconds);
   }
-
-  fadeIn(duration, delay, callback) {
-    const animation = this.animate(
-      [
-        {
-          opacity: 0,
-        },
-
-        {
-          opacity: 1,
-        },
-      ],
-      { duration, delay, iterations: 1, fill: "forwards" }
-    );
-
-    animation.addEventListener("finish", () => {
-      callback && callback();
-    });
-
-    return animation;
-  }
-
-  fadeOut(duration, delay, callback) {
-    const animation = this.animate(
-      [
-        {
-          opacity: 1,
-        },
-
-        {
-          opacity: 0,
-        },
-      ],
-      { duration, delay, iterations: 1, fill: "forwards" }
-    );
-
-    animation.addEventListener("finish", () => {
-      callback && callback();
-    });
-
-    return animation;
-  }
 }
 
 window.customElements.define("game-timer", Timer);
