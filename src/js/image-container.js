@@ -127,6 +127,12 @@ class ImageContainer extends HTMLElement {
       callback && callback();
     });
 
+    if (isNewBestTime) {
+      import("canvas-confetti").then((confetti) => {
+        confetti.default();
+      });
+    }
+
     return animation;
   }
 
