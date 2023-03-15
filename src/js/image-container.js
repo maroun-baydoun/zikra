@@ -156,6 +156,8 @@ class ImageContainer extends HTMLElement {
 
       resizeImage(maxWidth, maxHeight)(image);
 
+      this.setAttribute("loaded", "");
+
       this.style.setProperty("--width", `${image.width}px`);
       this.style.setProperty("--height", `${image.height}px`);
 

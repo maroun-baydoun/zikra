@@ -491,6 +491,9 @@ image-container {
   width: var(--width);
   height: var(--height);
   background-color: var(--color-black);
+}
+
+image-container[loaded] {
   border: 3px solid var(--color-black);
   border-radius: var(--border-radius-small);
 }
