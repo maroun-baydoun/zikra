@@ -1,8 +1,8 @@
 import { configureRouter } from "./location.js";
 import { setTitle } from "./title";
 
-import { addSplashScreen } from "./splash-screen.js";
-import { addSettingsScreen } from "./settings-screen.js";
+import { addSplashScreen } from "./screens/splash-screen.js";
+import { addSettingsScreen } from "./screens/settings-screen.js";
 import { displayImageSelector } from "./image-selector.js";
 import { addPuzzleContainer } from "./puzzle-container";
 

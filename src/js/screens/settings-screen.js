@@ -1,5 +1,6 @@
-import { getSettings, setSettings } from "./settings/settings-manager.js";
-import { goTo } from "./router";
+import { getSettings, setSettings } from "../settings/settings-manager.js";
+import { settingsStash } from "../settings/settings-stash.js";
+import { goTo } from "../router";
 
 export const SettingsScreenTagName = "za-settings-screen";
 
@@ -39,26 +40,29 @@ class SettingsScreen extends HTMLElement {
 
     const settings = { difficulty };
 
+    settingsStash.update((oldSettings) => ({ ...oldSettings, ...settings }));
+
     setSettings(settings);
 
     goTo("/");
   }
 
   connectedCallback() {
-    const { difficulty } = getSettings();
-
     this.appendChild(template.content.cloneNode(true));
-
     const form = this.querySelector("form");
     form.addEventListener("submit", this.onSubmit);
 
-    const difficultyRadio = document.getElementById(
-      `settings-difficulty-${difficulty}`
-    );
+    settingsStash.onUpdate((settings) => {
+      const { difficulty } = settings;
 
-    if (difficultyRadio) {
-      difficultyRadio.checked = true;
-    }
+      const difficultyRadio = document.getElementById(
+        `settings-difficulty-${difficulty}`
+      );
+
+      if (difficultyRadio) {
+        difficultyRadio.checked = true;
+      }
+    });
   }
 }
 

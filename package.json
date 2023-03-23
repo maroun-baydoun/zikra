@@ -26,6 +26,7 @@
   "dependencies": {
     "canvas-confetti": "1.6.0",
     "evented-ts": "2.0.0",
+    "idb-keyval": "6.2.0",
     "mediaq": "2.0.0"
   }
 }
