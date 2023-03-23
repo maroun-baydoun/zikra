@@ -1,4 +1,4 @@
-import hourglassSvg from "../icon/hourglass.svg?raw";
+import hourglassSvg from "../../icon/hourglass.svg?raw";
 
 class Loader extends HTMLElement {
   connectedCallback() {
@@ -6,7 +6,9 @@ class Loader extends HTMLElement {
   }
 }
 
-window.customElements.define("game-loader", Loader);
+export const registerLoader = () => {
+  window.customElements.define("game-loader", Loader);
+};
 
 export const addLoader = (container) => {
   const loader = document.createElement("game-loader");

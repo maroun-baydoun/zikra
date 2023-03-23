@@ -1,6 +1,6 @@
 import { getSettings, setSettings } from "../settings/settings-manager.js";
 import { settingsStash } from "../settings/settings-stash.js";
-import { goTo } from "../router";
+import { goTo } from "../location/router";
 
 export const SettingsScreenTagName = "za-settings-screen";
 
@@ -66,7 +66,9 @@ class SettingsScreen extends HTMLElement {
   }
 }
 
-window.customElements.define(SettingsScreenTagName, SettingsScreen);
+export const registerSettingsScreen = () => {
+  window.customElements.define(SettingsScreenTagName, SettingsScreen);
+};
 
 export const addSettingsScreen = (container) => {
   const settingsScreen = document.createElement(SettingsScreenTagName);

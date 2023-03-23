@@ -1,7 +1,7 @@
-import { IMAGE_IDS } from "./image-ids.js";
+import { IMAGE_IDS } from "../image-ids.js";
 import { addLink } from "./link.js";
 import { formatSeconds } from "./timer";
-import { getImageScore } from "./score/score-manager.js";
+import { getImageScore } from "../score/score-manager.js";
 import { addBackArrow } from "./back-arrow";
 
 class ImageSelector extends HTMLElement {
@@ -34,7 +34,7 @@ class ImageSelector extends HTMLElement {
           });
       };
 
-      import(`../img/${imageId}/medium.webp`).then((src) => {
+      import(`../../img/${imageId}/medium.webp`).then((src) => {
         image.src = src.default;
       });
 
@@ -79,7 +79,9 @@ class ImageSelector extends HTMLElement {
   }
 }
 
-window.customElements.define("image-selector", ImageSelector);
+export const registerImageSelector = () => {
+  window.customElements.define("image-selector", ImageSelector);
+};
 
 export const displayImageSelector = (container) => {
   const imageSelector = document.createElement("image-selector");

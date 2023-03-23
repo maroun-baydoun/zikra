@@ -1,4 +1,4 @@
-import { getFloatAttribute, getIntAttribute } from "./attribute.js";
+import { getFloatAttribute, getIntAttribute } from "../dom/attribute.js";
 
 class Piece extends HTMLElement {
   resetXY() {
@@ -88,7 +88,9 @@ class Piece extends HTMLElement {
   }
 }
 
-window.customElements.define("image-piece", Piece);
+export const registerPiece = () => {
+  window.customElements.define("image-piece", Piece);
+};
 
 export const makePiece = (gridComplexity) => {
   const getPieceXYFn = getPieceXY(gridComplexity);

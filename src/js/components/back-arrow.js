@@ -1,4 +1,4 @@
-import arrowLeftSvg from "../icon/arrow-left.svg?raw";
+import arrowLeftSvg from "../../icon/arrow-left.svg?raw";
 
 export const BackArrowTagName = "za-back-arrow";
 
@@ -30,7 +30,7 @@ class BackArrow extends HTMLElement {
   }
 }
 
-export const register = () => {
+export const registerBackArrow = () => {
   window.customElements.define(BackArrowTagName, BackArrow);
 };
 

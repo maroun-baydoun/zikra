@@ -1,4 +1,4 @@
-import pauseSvg from "../icon/pause.svg?raw";
+import pauseSvg from "../../icon/pause.svg?raw";
 
 export const PauseButtonTagName = "za-pause-button";
 
@@ -31,7 +31,9 @@ class PauseButton extends HTMLElement {
   }
 }
 
-window.customElements.define(PauseButtonTagName, PauseButton);
+export const registerPauseButton = () => {
+  window.customElements.define(PauseButtonTagName, PauseButton);
+};
 
 export const addPauseButton = (container) => {
   const pauseButton = document.createElement(PauseButtonTagName);

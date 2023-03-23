@@ -69,7 +69,9 @@ class Timer extends HTMLElement {
   }
 }
 
-window.customElements.define("game-timer", Timer);
+export const registerTimer = () => {
+  window.customElements.define("game-timer", Timer);
+};
 
 export const addTimer = (container) => {
   const gameTimer = document.createElement("game-timer");

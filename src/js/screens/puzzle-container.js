@@ -1,10 +1,10 @@
 import { Mediaq } from "mediaq";
-import { addImageContainer } from "./image-container.js";
-import { addTimer, formatSeconds } from "./timer.js";
-import { addPauseButton } from "./pause-button";
-import { addLoader } from "./loader.js";
-import { setImageScore, getImageScore } from "./score/score-manager.js";
-import { showMask } from "./mask.js";
+import { addImageContainer } from "../components/image-container.js";
+import { addTimer, formatSeconds } from "../components/timer.js";
+import { addPauseButton } from "../components/pause-button";
+import { addLoader } from "../components/loader.js";
+import { setImageScore, getImageScore } from "../score/score-manager.js";
+import { showMask } from "../mask.js";
 
 class PuzzleContainer extends HTMLElement {
   constructor() {
@@ -161,7 +161,9 @@ class PuzzleContainer extends HTMLElement {
   }
 }
 
-window.customElements.define("puzzle-container", PuzzleContainer);
+export const registerPuzzleScreen = () => {
+  window.customElements.define("puzzle-container", PuzzleContainer);
+};
 
 export const addPuzzleContainer = (container, { imageId }) => {
   const puzzleContainer = document.createElement("puzzle-container");

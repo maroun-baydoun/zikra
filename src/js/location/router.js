@@ -1,12 +1,12 @@
 import { configureRouter } from "./location.js";
-import { setTitle } from "./title";
+import { setTitle } from "../title";
 
-import { addSplashScreen } from "./screens/splash-screen.js";
-import { addSettingsScreen } from "./screens/settings-screen.js";
-import { displayImageSelector } from "./image-selector.js";
-import { addPuzzleContainer } from "./puzzle-container";
+import { addSplashScreen } from "../screens/splash-screen.js";
+import { addSettingsScreen } from "../screens/settings-screen.js";
+import { displayImageSelector } from "../components/image-selector.js";
+import { addPuzzleContainer } from "../screens/puzzle-container";
 
-import metada from "../img/metadata.json";
+import metada from "../../img/metadata.json";
 
 export const ROUTES = [
   { name: "home", path: "/" },

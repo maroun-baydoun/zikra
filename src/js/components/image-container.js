@@ -1,7 +1,7 @@
-import { shuffleArray } from "./array.js";
-import { resizeImage } from "./image.js";
+import { shuffleArray } from "../array.js";
+import { resizeImage } from "../image.js";
 import { makePiece, getPieceDimensions } from "./piece.js";
-import { getSettings } from "./settings/settings-manager.js";
+import { getSettings } from "../settings/settings-manager.js";
 
 class ImageContainer extends HTMLElement {
   constructor() {
@@ -219,7 +219,7 @@ class ImageContainer extends HTMLElement {
 
     const imageId = this.getAttribute("image-id");
 
-    import(`../img/${imageId}/large.webp`).then((src) => {
+    import(`../../img/${imageId}/large.webp`).then((src) => {
       image.src = src.default;
 
       this.style.setProperty("--background-image", `url(${image.src})`);
@@ -227,7 +227,9 @@ class ImageContainer extends HTMLElement {
   }
 }
 
-window.customElements.define("image-container", ImageContainer);
+export const registerImageContainer = () => {
+  window.customElements.define("image-container", ImageContainer);
+};
 
 export const addImageContainer = ({ imageId }, container) => {
   const { width: maxWidth, height: maxHeight } =

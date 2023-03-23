@@ -1,4 +1,4 @@
-import { goTo } from "./router.js";
+import { goTo } from "../location/router.js";
 
 export const LinkTagName = "za-link";
 
@@ -56,7 +56,7 @@ class Link extends HTMLElement {
   }
 }
 
-export const register = () => {
+export const registerLink = () => {
   window.customElements.define(LinkTagName, Link);
 };
 

@@ -21,7 +21,9 @@ class SplashScreen extends HTMLElement {
   }
 }
 
-window.customElements.define(SplashScreenTagName, SplashScreen);
+export const registerHomeScreen = () => {
+  window.customElements.define(SplashScreenTagName, SplashScreen);
+};
 
 export const addSplashScreen = (container) => {
   const splashScreen = document.createElement(SplashScreenTagName);
