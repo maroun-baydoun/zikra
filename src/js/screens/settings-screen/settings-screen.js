@@ -1,7 +1,7 @@
 import { getSettings, setSettings } from "../../settings/settings-manager.js";
 import { goTo } from "../../location/router";
 
-import "../../../css/settings-screen.css";
+import "./style.css";
 
 import templateHtml from "./template.html?raw";
 

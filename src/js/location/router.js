@@ -1,7 +1,7 @@
 import { configureRouter } from "./location.js";
 import { setTitle } from "../title";
 
-import { addSplashScreen } from "../screens/splash-screen.js";
+import { addHomeScreen } from "../screens/home-screen/home-screen.js";
 import { addSettingsScreen } from "../screens/settings-screen/settings-screen.js";
 import { displayImageSelector } from "../components/image-selector.js";
 import { addPuzzleContainer } from "../screens/puzzle-container";
@@ -26,7 +26,7 @@ export const goTo = configureRouter(ROUTES)(
 
     if (routeName === "home") {
       setTitle("Zikra - Putting the pieces back together", false);
-      addSplashScreen(body);
+      addHomeScreen(body);
     } else if (routeName === "settings") {
       setTitle("Settings");
       addSettingsScreen(body);
