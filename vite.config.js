@@ -1,7 +1,5 @@
 export default ({ command, mode }) => {
-  if (command === "serve") {
-    return {};
-  } else {
-    return {};
-  }
+  return {
+    assetsInclude: "**/*.html",
+  };
 };

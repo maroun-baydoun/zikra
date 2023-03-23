@@ -2,7 +2,7 @@ import { configureRouter } from "./location.js";
 import { setTitle } from "../title";
 
 import { addSplashScreen } from "../screens/splash-screen.js";
-import { addSettingsScreen } from "../screens/settings-screen.js";
+import { addSettingsScreen } from "../screens/settings-screen/settings-screen.js";
 import { displayImageSelector } from "../components/image-selector.js";
 import { addPuzzleContainer } from "../screens/puzzle-container";
 
