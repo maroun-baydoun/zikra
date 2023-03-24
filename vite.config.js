@@ -1,5 +1,5 @@
 export default ({ command, mode }) => {
   return {
-    assetsInclude: "**/*.html",
+    //assetsInclude: "**/*.html",
   };
 };
