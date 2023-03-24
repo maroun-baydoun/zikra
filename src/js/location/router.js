@@ -4,7 +4,7 @@ import { setTitle } from "../title";
 import { addHomeScreen } from "../screens/home-screen/home-screen.js";
 import { addSettingsScreen } from "../screens/settings-screen/settings-screen.js";
 import { displayImageSelector } from "../components/image-selector.js";
-import { addPuzzleContainer } from "../screens/puzzle-container";
+import { addPuzzleScreen } from "../screens/puzzle-screen/puzzle-screen";
 
 import metada from "../../img/metadata.json";
 
@@ -44,7 +44,7 @@ export const goTo = configureRouter(ROUTES)(
       }
 
       const container = addContainer(body);
-      addPuzzleContainer(container, { imageId });
+      addPuzzleScreen(container, { imageId });
     }
   },
   () => {}

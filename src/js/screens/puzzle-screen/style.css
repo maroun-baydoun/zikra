@@ -1,0 +1,62 @@
+puzzle-screen {
+  flex: 1;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "timer .  pause"
+    "image image image";
+  justify-content: center;
+  align-items: center;
+
+  row-gap: var(--spacing);
+}
+
+@media screen and (min-width: 1024px) {
+  puzzle-screen {
+    grid-template-rows: 50px 50px 1fr;
+    grid-template-columns: 1fr var(--width) 1fr;
+    grid-template-areas:
+      ". image timer"
+      ". image pause"
+      ". image .";
+  }
+}
+
+puzzle-screen za-pause-button {
+  grid-area: pause;
+  justify-self: flex-end;
+  display: none;
+}
+
+puzzle-screen[started] za-pause-button {
+  display: initial;
+}
+
+puzzle-screen[solved] za-pause-button {
+  display: none;
+}
+
+puzzle-screen game-timer {
+  grid-area: timer;
+  align-self: center;
+  justify-self: flex-start;
+  display: none;
+}
+
+puzzle-screen[started] game-timer {
+  display: initial;
+}
+
+@media screen and (min-width: 1024px) {
+  puzzle-screen game-timer {
+    align-self: flex-start;
+    justify-self: flex-end;
+  }
+}
+
+puzzle-screen image-container {
+  grid-area: image;
+  justify-self: center;
+}

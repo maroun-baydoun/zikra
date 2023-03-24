@@ -1,12 +1,14 @@
 import { Mediaq } from "mediaq";
-import { addImageContainer } from "../components/image-container.js";
-import { addTimer, formatSeconds } from "../components/timer.js";
-import { addPauseButton } from "../components/pause-button";
-import { addLoader } from "../components/loader.js";
-import { setImageScore, getImageScore } from "../score/score-manager.js";
-import { showMask } from "../mask.js";
+import { addImageContainer } from "../../components/image-container.js";
+import { addTimer, formatSeconds } from "../../components/timer.js";
+import { addPauseButton } from "../../components/pause-button";
+import { addLoader } from "../../components/loader.js";
+import { setImageScore, getImageScore } from "../../score/score-manager.js";
+import { showMask } from "../../mask.js";
 
-class PuzzleContainer extends HTMLElement {
+import "./style.css";
+
+class PuzzleScreen extends HTMLElement {
   constructor() {
     super();
 
@@ -162,13 +164,13 @@ class PuzzleContainer extends HTMLElement {
 }
 
 export const registerPuzzleScreen = () => {
-  window.customElements.define("puzzle-container", PuzzleContainer);
+  window.customElements.define("puzzle-screen", PuzzleScreen);
 };
 
-export const addPuzzleContainer = (container, { imageId }) => {
-  const puzzleContainer = document.createElement("puzzle-container");
-  puzzleContainer.setAttribute("image-id", imageId);
-  container.appendChild(puzzleContainer);
+export const addPuzzleScreen = (container, { imageId }) => {
+  const puzzleScreen = document.createElement("puzzle-screen");
+  puzzleScreen.setAttribute("image-id", imageId);
+  container.appendChild(puzzleScreen);
 
-  return puzzleContainer;
+  return puzzleScreen;
 };

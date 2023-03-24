@@ -12,7 +12,7 @@ import { registerImageContainer } from "./src/js/components/image-container";
 
 import { registerHomeScreen } from "./src/js/screens/home-screen/home-screen";
 import { registerSettingsScreen } from "./src/js/screens/settings-screen/settings-screen";
-import { registerPuzzleScreen } from "./src/js/screens/puzzle-container";
+import { registerPuzzleScreen } from "./src/js/screens/puzzle-screen/puzzle-screen";
 
 registerLink();
 registerBackArrow();
