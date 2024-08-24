@@ -147,8 +147,18 @@ class PuzzleScreen extends HTMLElement {
         this.onPlayAgain();
       });
 
+      const giveUpButton = document.createElement("za-link");
+      giveUpButton.setAttribute("href", "/images");
+      giveUpButton.classList.add("button", "button-rounded", "button-padded");
+      giveUpButton.appendChild(document.createTextNode("Give up"));
+
       try {
-        const dismiss = showMask([paused, resumeButton, playAgainButton]);
+        const dismiss = showMask([
+          paused,
+          resumeButton,
+          playAgainButton,
+          giveUpButton,
+        ]);
         this.dismissMask = dismiss;
 
         this.gameTimer.stop();
