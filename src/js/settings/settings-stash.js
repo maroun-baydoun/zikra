@@ -7,5 +7,5 @@ export const settingsStash = createStash(
   createStorage(`za-settings-v${VERSION}`),
   {
     difficulty: "easy",
-  }
+  },
 );

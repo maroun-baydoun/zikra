@@ -17,7 +17,7 @@ class Piece extends HTMLElement {
           transform: `translate3d(${this.finalPositionX}px, ${this.finalPositionY}px, 0)`,
         },
       ],
-      { duration, delay, iterations: 1, fill: "forwards", easing: "ease-in" }
+      { duration, delay, iterations: 1, fill: "forwards", easing: "ease-in" },
     );
 
     animation.addEventListener("finish", () => {
@@ -74,11 +74,11 @@ class Piece extends HTMLElement {
     button.style.setProperty("--background-width", `${this.backgroundWidth}px`);
     button.style.setProperty(
       "--background-height",
-      `${this.backgroundHeight}px`
+      `${this.backgroundHeight}px`,
     );
     button.style.setProperty(
       "background-image",
-      `url(${this.backgroundImage})`
+      `url(${this.backgroundImage})`,
     );
 
     button.style.setProperty("--image-position-x", `${-1 * this.positionX}px`);
@@ -110,7 +110,7 @@ export const makePiece = (gridComplexity) => {
     const [finalPositionX, finalPositionY] = getPieceXYFn(
       width,
       height,
-      randomIndex
+      randomIndex,
     );
 
     piece.setAttribute("width", width);

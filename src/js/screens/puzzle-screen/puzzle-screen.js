@@ -136,7 +136,7 @@ class PuzzleScreen extends HTMLElement {
       playAgainButton.classList.add(
         "button",
         "button-rounded",
-        "button-padded"
+        "button-padded",
       );
       playAgainButton.appendChild(document.createTextNode("Try again!"));
 

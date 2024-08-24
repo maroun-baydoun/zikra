@@ -83,8 +83,8 @@ class ImageContainer extends HTMLElement {
       finished.classList.add("pieces-container-finished");
       finished.appendChild(
         document.createTextNode(
-          !isNewBestTime ? "Your best time:" : "Your previous best time:"
-        )
+          !isNewBestTime ? "Your best time:" : "Your previous best time:",
+        ),
       );
 
       const score = document.createElement("div");
@@ -120,7 +120,7 @@ class ImageContainer extends HTMLElement {
         iterations: 1,
         fill: "forwards",
         easing: "ease-out",
-      }
+      },
     );
 
     animation.addEventListener("finish", () => {

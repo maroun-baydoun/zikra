@@ -54,7 +54,7 @@ class ImageSelector extends HTMLElement {
         const scoreDisplay = document.createElement("div");
         scoreDisplay.classList.add("image-card-score");
         scoreDisplay.appendChild(
-          document.createTextNode(secondsFormatter(score))
+          document.createTextNode(secondsFormatter(score)),
         );
 
         overlay.appendChild(bestScore);

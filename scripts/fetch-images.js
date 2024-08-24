@@ -47,7 +47,7 @@ const downloadImages = (parsedResponse) => {
 
       const metadata = parsedResponse.reduce(
         (data, { id, title }) => ({ ...data, [id]: { title } }),
-        {}
+        {},
       );
 
       fs.writeFile(
@@ -58,13 +58,13 @@ const downloadImages = (parsedResponse) => {
           if (error) {
             throw error;
           }
-        }
+        },
       );
 
       const responsePhotoIds = parsedResponse.map((photo) => photo.id);
 
       const photoIdsToDelete = existingPhotoIds.filter(
-        (id) => !responsePhotoIds.includes(id)
+        (id) => !responsePhotoIds.includes(id),
       );
 
       photoIdsToDelete.forEach((id) => {
@@ -77,10 +77,10 @@ const downloadImages = (parsedResponse) => {
             if (error) {
               throw error;
             }
-          }
+          },
         );
       });
-    })
+    }),
   );
 
   parsedResponse.forEach((photo) => {
@@ -106,7 +106,7 @@ const downloadImages = (parsedResponse) => {
                     fetchAndWriteFile(
                       photo.urlLarge,
                       imageDirectoryPath,
-                      "large.jpg"
+                      "large.jpg",
                     ),
                   ]
                 : []),
@@ -116,7 +116,7 @@ const downloadImages = (parsedResponse) => {
                     fetchAndWriteFile(
                       photo.urlMedium,
                       imageDirectoryPath,
-                      "medium.jpg"
+                      "medium.jpg",
                     ),
                   ]
                 : []),
@@ -128,11 +128,11 @@ const downloadImages = (parsedResponse) => {
             fetchAndWriteFile(
               photo.urlMedium,
               imageDirectoryPath,
-              "medium.jpg"
+              "medium.jpg",
             ),
           ]).then(onDone);
         }
-      }
+      },
     );
   });
 };

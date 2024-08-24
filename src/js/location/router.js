@@ -47,7 +47,7 @@ export const goTo = configureRouter(ROUTES)(
       addPuzzleScreen(container, { imageId });
     }
   },
-  () => {}
+  () => {},
 );
 
 const clearContainer = (container) => {

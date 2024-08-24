@@ -28,13 +28,13 @@ const convertToWebp = () => {
           const imagePath = path.join(
             imagesDirectoryPath,
             directory,
-            imageFile
+            imageFile,
           );
 
           const webpFilePath = path.join(
             imagesDirectoryPath,
             directory,
-            `${imageFileName}.webp`
+            `${imageFileName}.webp`,
           );
 
           const sharpImage = sharp(imagePath);

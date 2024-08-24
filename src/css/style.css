@@ -436,7 +436,8 @@ game-loader {
   height: 50px;
   top: 50%;
   left: 50%;
-  animation: display-loader 0.1s linear 0.5s 1 normal forwards,
+  animation:
+    display-loader 0.1s linear 0.5s 1 normal forwards,
     loading 0.9s cubic-bezier(0.94, 0.31, 0.18, 0.43) 0s infinite normal
       forwards;
 }

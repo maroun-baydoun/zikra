@@ -30,7 +30,7 @@ class Link extends HTMLElement {
     super();
 
     this.attachShadow({ mode: "open" }).appendChild(
-      template.content.cloneNode(true)
+      template.content.cloneNode(true),
     );
   }
 

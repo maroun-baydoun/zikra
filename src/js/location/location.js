@@ -16,7 +16,7 @@ const routeMatchablePath = (path, params) => {
   }
 
   const searchForParamPlaceholdersRegex = new RegExp(
-    params.map((param) => `\\${param[0]}`).join("|")
+    params.map((param) => `\\${param[0]}`).join("|"),
   );
 
   return `${path.replace(searchForParamPlaceholdersRegex, "(\\w+)")}$`;
@@ -42,7 +42,7 @@ const matchRoute = (compiledRoute) => {
 
       return parameterMap;
     },
-    {}
+    {},
   );
 
   const matches = parameterValues.length > 0;

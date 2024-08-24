@@ -5,5 +5,5 @@ const VERSION = 1;
 
 export const scoreStash = createStash(
   createStorage(`za-scores-v${VERSION}`),
-  {}
+  {},
 );

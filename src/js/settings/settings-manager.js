@@ -52,7 +52,7 @@ const _settingsManager = () => {
     setSettings: _setSettings(state),
     onSettingsUpdate: (callback) => {
       settingsEvented.on("settings-update", (event) =>
-        callback(event.args.settings)
+        callback(event.args.settings),
       );
     },
   };

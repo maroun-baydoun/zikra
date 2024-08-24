@@ -35,7 +35,7 @@ class SettingsScreen extends HTMLElement {
     const { difficulty } = getSettings();
 
     const difficultyRadio = document.getElementById(
-      `settings-difficulty-${difficulty}`
+      `settings-difficulty-${difficulty}`,
     );
 
     if (difficultyRadio) {
