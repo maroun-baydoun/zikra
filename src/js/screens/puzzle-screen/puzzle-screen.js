@@ -14,6 +14,7 @@ class PuzzleScreen extends HTMLElement {
 
     this.onMediaQueryMatchUpdate = this.onMediaQueryMatchUpdate.bind(this);
     this.onPlayAgain = this.onPlayAgain.bind(this);
+    this.onVisibilityChange = this.onVisibilityChange.bind(this);
   }
 
   displayImageContainer() {
@@ -94,6 +95,57 @@ class PuzzleScreen extends HTMLElement {
     }
   }
 
+  onVisibilityChange() {
+    if (window.document.visibilityState === "hidden") {
+      this.pause();
+    }
+  }
+
+  pause() {
+    const paused = document.createElement("div");
+    paused.classList.add("mask-text");
+    paused.appendChild(document.createTextNode("Paused"));
+
+    const resumeButton = document.createElement("button");
+    resumeButton.classList.add("button", "button-rounded", "button-padded");
+    resumeButton.appendChild(document.createTextNode("Continue"));
+
+    resumeButton.addEventListener("click", () => {
+      if (this.dismissMask) {
+        this.dismissMask();
+      }
+      this.gameTimer.start();
+    });
+
+    const playAgainButton = document.createElement("button");
+    playAgainButton.classList.add("button", "button-rounded", "button-padded");
+    playAgainButton.appendChild(document.createTextNode("Try again!"));
+
+    playAgainButton.addEventListener("click", () => {
+      if (this.dismissMask) {
+        this.dismissMask();
+      }
+      this.onPlayAgain();
+    });
+
+    const giveUpButton = document.createElement("za-link");
+    giveUpButton.setAttribute("href", "/images");
+    giveUpButton.classList.add("button", "button-rounded", "button-padded");
+    giveUpButton.appendChild(document.createTextNode("Give up"));
+
+    try {
+      const dismiss = showMask([
+        paused,
+        resumeButton,
+        playAgainButton,
+        giveUpButton,
+      ]);
+      this.dismissMask = dismiss;
+
+      this.gameTimer.stop();
+    } catch {}
+  }
+
   connectedCallback() {
     const mediaq = Mediaq({
       onUpdate: this.onMediaQueryMatchUpdate,
@@ -107,6 +159,10 @@ class PuzzleScreen extends HTMLElement {
     });
 
     window.addEventListener("beforeunload", this.onBeforeUnload);
+    window.document.addEventListener(
+      "visibilitychange",
+      this.onVisibilityChange,
+    );
 
     this.pauseButton = addPauseButton(this);
 
@@ -117,52 +173,7 @@ class PuzzleScreen extends HTMLElement {
     mediaq.start();
 
     this.pauseButton.addEventListener("click", () => {
-      const paused = document.createElement("div");
-      paused.classList.add("mask-text");
-      paused.appendChild(document.createTextNode("Paused"));
-
-      const resumeButton = document.createElement("button");
-      resumeButton.classList.add("button", "button-rounded", "button-padded");
-      resumeButton.appendChild(document.createTextNode("Continue"));
-
-      resumeButton.addEventListener("click", () => {
-        if (this.dismissMask) {
-          this.dismissMask();
-        }
-        this.gameTimer.start();
-      });
-
-      const playAgainButton = document.createElement("button");
-      playAgainButton.classList.add(
-        "button",
-        "button-rounded",
-        "button-padded",
-      );
-      playAgainButton.appendChild(document.createTextNode("Try again!"));
-
-      playAgainButton.addEventListener("click", () => {
-        if (this.dismissMask) {
-          this.dismissMask();
-        }
-        this.onPlayAgain();
-      });
-
-      const giveUpButton = document.createElement("za-link");
-      giveUpButton.setAttribute("href", "/images");
-      giveUpButton.classList.add("button", "button-rounded", "button-padded");
-      giveUpButton.appendChild(document.createTextNode("Give up"));
-
-      try {
-        const dismiss = showMask([
-          paused,
-          resumeButton,
-          playAgainButton,
-          giveUpButton,
-        ]);
-        this.dismissMask = dismiss;
-
-        this.gameTimer.stop();
-      } catch {}
+      this.pause();
     });
 
     this.displayImageContainer();
@@ -170,6 +181,7 @@ class PuzzleScreen extends HTMLElement {
 
   disconnectedCallback() {
     window.removeEventListener("beforeunload", this.onBeforeUnload);
+    window.removeEventListener("visibilitychange", this.onVisibilityChange);
   }
 }
 
