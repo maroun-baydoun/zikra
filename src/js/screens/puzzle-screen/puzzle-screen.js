@@ -181,7 +181,7 @@ class PuzzleScreen extends HTMLElement {
 
   disconnectedCallback() {
     window.removeEventListener("beforeunload", this.onBeforeUnload);
-    window.removeEventListener("visibilitychange", this.onVisibilityChange);
+    window.document.removeEventListener("visibilitychange", this.onVisibilityChange);
   }
 }
 
