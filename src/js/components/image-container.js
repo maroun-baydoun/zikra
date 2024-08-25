@@ -106,6 +106,19 @@ class ImageContainer extends HTMLElement {
 
     overlay.appendChild(playAgainButton);
 
+    const chooseAnotherImageButton = document.createElement("za-link");
+    chooseAnotherImageButton.setAttribute("href", "/images");
+    chooseAnotherImageButton.classList.add(
+      "button",
+      "button-rounded",
+      "button-padded",
+    );
+    chooseAnotherImageButton.appendChild(
+      document.createTextNode("Try another image"),
+    );
+
+    overlay.appendChild(chooseAnotherImageButton);
+
     this.appendChild(overlay);
 
     const animation = overlay.animate(
