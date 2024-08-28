@@ -102,6 +102,10 @@ class PuzzleScreen extends HTMLElement {
   }
 
   pause() {
+    if (this.hasAttribute("solved")) {
+      return;
+    }
+
     const paused = document.createElement("div");
     paused.classList.add("mask-text");
     paused.appendChild(document.createTextNode("Paused"));
