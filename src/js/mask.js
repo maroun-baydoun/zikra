@@ -1,20 +1,20 @@
 export const showMask = (children) => {
-  const existingMask = document.querySelector("div.mask");
+  const existingMask = document.querySelector("dialog");
 
   if (existingMask) {
     throw new Error("A mask exists already");
   }
 
-  const mask = document.createElement("div");
-  mask.classList.add("mask");
+  const dialog = document.createElement("dialog");
 
-  mask.append(...children);
+  dialog.append(...children);
 
-  document.body.classList.add("masked");
-  document.body.appendChild(mask);
+  document.body.appendChild(dialog);
+
+  dialog.showModal();
 
   return () => {
-    mask.remove();
-    document.body.classList.remove("masked");
+    dialog.close();
+    dialog.remove();
   };
 };

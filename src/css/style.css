@@ -57,10 +57,6 @@ body {
   font-family: var(--font-family-sans-serif);
 }
 
-body.masked {
-  overflow: hidden;
-}
-
 h1,
 h2,
 h3 {
@@ -157,22 +153,24 @@ header h2 {
   }
 }
 
-.mask {
+dialog {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 9999;
-  opacity: 0;
-  animation: mask-fade-in 200ms ease-out 0s 1 normal forwards;
+  border: 0;
+  background: none;
 
+  width: var(--max-width);
   gap: calc(var(--spacing) * 3);
+}
+
+dialog[open] {
+  animation: mask-fade-in 200ms ease-out 0s 1 normal forwards;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 @keyframes mask-fade-in {
