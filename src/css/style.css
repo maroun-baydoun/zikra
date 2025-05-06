@@ -54,7 +54,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
-  min-height: 100vh;
+  min-height: 100svh;
 
   font-family: var(--font-family-sans-serif);
 }
@@ -150,15 +150,6 @@ header h2 {
   white-space: pre;
 
   font-size: var(--font-size-l);
-}
-
-@keyframes h2-animate {
-  50% {
-    word-spacing: -0.5rem;
-  }
-  100% {
-    word-spacing: 0.5rem;
-  }
 }
 
 dialog {
