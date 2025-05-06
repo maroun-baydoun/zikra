@@ -19,3 +19,15 @@ za-home-screen {
 
   gap: var(--spacing);
 }
+
+.footer {
+  padding: calc(var(--spacing) * 2);
+}
+
+.footer-content {
+  text-align: center;
+}
+
+.footer a {
+  color: var(--color-off-white);
+}
