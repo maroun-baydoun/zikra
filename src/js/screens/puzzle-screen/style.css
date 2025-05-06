@@ -2,7 +2,7 @@ puzzle-screen {
   flex: 1;
   width: 100%;
   display: grid;
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: 50px max-content;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
     "timer .  pause"
@@ -10,11 +10,12 @@ puzzle-screen {
   justify-content: center;
   align-items: center;
 
-  row-gap: var(--spacing);
+  row-gap: calc(var(--spacing) * 3);
 }
 
 @media screen and (min-width: 1024px) {
   puzzle-screen {
+    row-gap: var(--spacing);
     grid-template-rows: 50px 50px 1fr;
     grid-template-columns: 1fr var(--width) 1fr;
     grid-template-areas:
