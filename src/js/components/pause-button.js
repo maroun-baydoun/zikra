@@ -13,6 +13,11 @@ template.innerHTML = `
     width:35px;
   }
 
+  button:focus-visible {
+    outline: 2px solid var(--color-outline);
+    outline-offset: 2px;
+  }
+
  svg {
     fill: var(--color-black);
  }
