@@ -219,35 +219,43 @@ dialog::backdrop {
   padding: var(--spacing);
 }
 
+@media screen and (min-width: 1024px) {
+  .container {
+    padding: var(--spacing) calc(var(--spacing) * 1.5);
+  }
+}
+
 image-selector {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr;
 
   gap: var(--spacing);
   margin-bottom: var(--spacing);
 }
 
-@media screen and (min-width: 1024px) {
-  image-selector {
-    padding: 0;
-    flex-direction: row;
-  }
-}
-
 .images-grid {
   width: 100%;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: 350px;
 
-  max-width: var(--max-width);
   gap: calc(var(--spacing) * 2);
 }
 
 @media screen and (min-width: 1024px) {
   .images-grid {
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    max-width: var(--max-width);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .images-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    max-width: calc(var(--max-width) * 1.5);
   }
 }
 
