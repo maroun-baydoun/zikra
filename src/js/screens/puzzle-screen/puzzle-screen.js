@@ -81,7 +81,9 @@ class PuzzleScreen extends HTMLElement {
       if (matches) {
         const turn = document.createElement("div");
         turn.classList.add("mask-text");
-        turn.appendChild(document.createTextNode("Turn it to portrait"));
+        turn.appendChild(
+          document.createTextNode("You can only play in portrait"),
+        );
         try {
           const dismiss = showMask([turn]);
           this.dismissMask = dismiss;
@@ -151,7 +153,7 @@ class PuzzleScreen extends HTMLElement {
   }
 
   connectedCallback() {
-    const mediaq = Mediaq({
+    this.mediaq = Mediaq({
       onUpdate: this.onMediaQueryMatchUpdate,
       mediaQueries: [
         {
@@ -174,7 +176,7 @@ class PuzzleScreen extends HTMLElement {
 
     this.loader = addLoader(this);
 
-    mediaq.start();
+    this.mediaq.start();
 
     this.pauseButton.addEventListener("click", () => {
       this.pause();
@@ -184,6 +186,7 @@ class PuzzleScreen extends HTMLElement {
   }
 
   disconnectedCallback() {
+    this.mediaq?.stop();
     window.removeEventListener("beforeunload", this.onBeforeUnload);
     window.document.removeEventListener(
       "visibilitychange",
