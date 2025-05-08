@@ -15,7 +15,7 @@ template.innerHTML = `
         fill: var(--color-black);
     }
   </style>
-  <za-link>
+  <za-link focusable="true">
   ${arrowLeftSvg}
   </za-link>`;
 
