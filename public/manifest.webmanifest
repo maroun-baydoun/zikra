@@ -1,9 +1,10 @@
 {
   "name": "Zikra",
   "short_name": "Zikra",
+  "description": "Putting the pieces back together",
   "theme_color": "#111111",
   "background_color": "#ffffff",
-  "display": "fullScreen",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
