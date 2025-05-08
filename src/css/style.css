@@ -104,6 +104,8 @@ a:focus-visible {
   background-color: var(--color-white);
 }
 
+button:focus-visible,
+.button:focus-visible,
 .button:focus-within {
   outline: 2px solid var(--color-outline);
   outline-offset: 2px;

@@ -1,0 +1,15 @@
+za-pause-button > button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  width: 35px;
+}
+
+za-pause-button > button:focus-visible {
+  outline: 2px solid var(--color-outline);
+  outline-offset: 2px;
+}
+
+za-pause-button > button > svg {
+  fill: var(--color-black);
+}
