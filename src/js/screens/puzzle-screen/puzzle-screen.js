@@ -92,6 +92,7 @@ class PuzzleScreen extends HTMLElement {
       } else {
         if (this.dismissMask) {
           this.dismissMask();
+          this.gameTimer.start();
         }
       }
     }
