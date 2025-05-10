@@ -407,11 +407,7 @@ image-piece {
 
   width: var(--width);
   height: var(--height);
-  transform: translate3d(
-    calc(var(--position-x) * 1px),
-    calc(var(--position-y) * 1px),
-    0
-  );
+  translate: calc(var(--position-x) * 1px) calc(var(--position-y) * 1px) 0;
 }
 
 image-piece[selected]::after {

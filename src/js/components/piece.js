@@ -6,18 +6,30 @@ class Piece extends HTMLElement {
     this.positionY = this.finalPositionY;
   }
 
+  /**
+   *
+   * @param {number} duration
+   * @param {number} delay
+   * @param {function} callback
+   * @returns Animation
+   */
   move(duration, delay, callback) {
     const animation = this.animate(
       [
         {
-          transform: `translate3d(${this.positionX}px, ${this.positionY}px, 0)`,
+          translate: `(${this.positionX}px ${this.positionY}px 0`,
         },
-
         {
-          transform: `translate3d(${this.finalPositionX}px, ${this.finalPositionY}px, 0)`,
+          translate: `${this.finalPositionX}px ${this.finalPositionY}px 0`,
         },
       ],
-      { duration, delay, iterations: 1, fill: "forwards", easing: "ease-in" },
+      {
+        duration,
+        delay,
+        iterations: 1,
+        fill: "forwards",
+        easing: "ease-in",
+      },
     );
 
     animation.addEventListener("finish", () => {
