@@ -183,6 +183,11 @@ dialog {
   gap: calc(var(--spacing) * 3);
 }
 
+dialog:focus,
+dialog:focus-visible {
+  outline: none;
+}
+
 dialog[open] {
   animation: mask-fade-in 200ms ease-out 0s 1 normal forwards;
 }
@@ -321,6 +326,10 @@ image-selector {
 .image-card[image-loaded]:focus-within .image-card-overlay {
   transform: translateY(0);
   opacity: 1;
+}
+
+.image-card-overlay za-button {
+  margin-top: auto;
 }
 
 .image-card-best-score {

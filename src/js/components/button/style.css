@@ -1,0 +1,62 @@
+:host {
+  width: 100%;
+  max-width: 250px;
+}
+
+@media screen and (min-width: 1024px) {
+  :host {
+    max-width: 300px;
+  }
+}
+
+.button {
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.5s ease-out;
+  border: 0;
+  -webkit-tap-highlight-color: transparent;
+
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-sans-serif);
+  color: var(--color-black);
+  background-color: var(--color-off-white);
+}
+
+.button:active,
+.button:hover {
+  background-color: var(--color-white);
+}
+
+.button:focus-visible,
+.button:is(za-link):focus-within {
+  outline: 2px solid var(--color-outline);
+  outline-offset: 2px;
+}
+
+.button[mouse-enter]:focus-within {
+  outline: none;
+}
+
+.button-rounded {
+  border-radius: calc(var(--border-radius) * 2);
+}
+
+.button-full-width {
+  max-width: unset;
+}
+
+.button-padded {
+  padding: calc(var(--spacing) * 0.75) var(--spacing);
+}
+
+.button-transparent,
+.button-transparent:hover {
+  background-color: transparent;
+  color: var(--color-off-white);
+}

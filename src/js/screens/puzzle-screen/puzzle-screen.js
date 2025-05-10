@@ -113,9 +113,10 @@ class PuzzleScreen extends HTMLElement {
     paused.classList.add("mask-text");
     paused.appendChild(document.createTextNode("Paused"));
 
-    const resumeButton = document.createElement("button");
-    resumeButton.classList.add("button", "button-rounded", "button-padded");
-    resumeButton.appendChild(document.createTextNode("Continue"));
+    const resumeButton = document.createElement("za-button");
+    resumeButton.setAttribute("padded", true);
+    resumeButton.setAttribute("rounded", true);
+    resumeButton.append("Continue");
 
     resumeButton.addEventListener("click", () => {
       if (this.dismissMask) {
@@ -124,9 +125,10 @@ class PuzzleScreen extends HTMLElement {
       this.gameTimer.start();
     });
 
-    const playAgainButton = document.createElement("button");
-    playAgainButton.classList.add("button", "button-rounded", "button-padded");
-    playAgainButton.appendChild(document.createTextNode("Try again!"));
+    const playAgainButton = document.createElement("za-button");
+    playAgainButton.setAttribute("padded", true);
+    playAgainButton.setAttribute("rounded", true);
+    playAgainButton.append("Try again!");
 
     playAgainButton.addEventListener("click", () => {
       if (this.dismissMask) {
@@ -135,10 +137,11 @@ class PuzzleScreen extends HTMLElement {
       this.onPlayAgain();
     });
 
-    const giveUpButton = document.createElement("za-link");
+    const giveUpButton = document.createElement("za-button");
     giveUpButton.setAttribute("href", "/images");
-    giveUpButton.classList.add("button", "button-rounded", "button-padded");
-    giveUpButton.appendChild(document.createTextNode("Give up"));
+    giveUpButton.setAttribute("padded", true);
+    giveUpButton.setAttribute("rounded", true);
+    giveUpButton.append("Give up");
 
     try {
       const dismiss = showMask([

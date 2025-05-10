@@ -1,7 +1,6 @@
-import { IMAGE_IDS } from "../image-ids.js";
-import { addLink } from "./link.js";
+import { IMAGE_IDS } from "../image-ids";
 import { formatSeconds } from "./timer";
-import { getImageScore } from "../score/score-manager.js";
+import { getImageScore } from "../score/score-manager";
 import { addBackArrow } from "./back-arrow";
 
 class ImageSelector extends HTMLElement {
@@ -67,12 +66,13 @@ class ImageSelector extends HTMLElement {
         overlay.appendChild(bestScore);
       }
 
-      const playButton = addLink(overlay, {
-        child: document.createTextNode("Play!"),
-        href: `/image/${imageId}`,
-        padded: true,
-      });
-      playButton.classList.add("button", "button-rounded");
+      const playButton = document.createElement("za-button");
+      playButton.setAttribute("href", `/image/${imageId}`);
+      playButton.setAttribute("padded", true);
+      playButton.setAttribute("rounded", true);
+      playButton.append("Play!");
+
+      overlay.appendChild(playButton);
 
       imagesGrid.appendChild(card);
     });
