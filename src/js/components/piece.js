@@ -17,7 +17,7 @@ class Piece extends HTMLElement {
     const animation = this.animate(
       [
         {
-          translate: `(${this.positionX}px ${this.positionY}px 0`,
+          translate: `${this.positionX}px ${this.positionY}px 0`,
         },
         {
           translate: `${this.finalPositionX}px ${this.finalPositionY}px 0`,
