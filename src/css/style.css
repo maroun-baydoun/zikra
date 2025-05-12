@@ -75,73 +75,9 @@ a:focus-visible {
   outline-offset: 2px;
 }
 
-.button {
-  width: 100%;
-  max-width: 250px;
-  cursor: pointer;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.5s ease-out;
-  border: 0;
-
-  font-size: var(--font-size-l);
-  font-weight: var(--font-weight-bold);
-  font-family: var(--font-family-sans-serif);
-  color: var(--color-black);
-  background-color: var(--color-off-white);
-}
-
-@media screen and (min-width: 1024px) {
-  .button {
-    max-width: 300px;
-  }
-}
-
-.button:focus,
-.button:hover {
-  background-color: var(--color-white);
-}
-
-button:focus-visible,
-.button:focus-visible,
-.button:focus-within {
+button:focus-visible {
   outline: 2px solid var(--color-outline);
   outline-offset: 2px;
-}
-
-.button-rounded {
-  border-radius: calc(var(--border-radius) * 2);
-}
-
-.button-full-width {
-  max-width: unset;
-}
-
-.button-padded {
-  padding: calc(var(--spacing) * 0.75) var(--spacing);
-}
-
-.button-dark {
-  color: var(--color-off-white);
-  background-color: var(--color-black);
-}
-
-.button-dark:focus,
-.button-dark:hover {
-  background-color: #222;
-}
-
-.button-transparent,
-.button-transparent:focus,
-.button-transparent:hover {
-  background-color: transparent;
-  color: var(--color-off-white);
-}
-
-a.button {
-  text-decoration: none;
 }
 
 header {
@@ -328,10 +264,6 @@ image-selector {
   opacity: 1;
 }
 
-.image-card-overlay za-button {
-  margin-top: auto;
-}
-
 .image-card-best-score {
   margin-top: auto;
   user-select: none;
@@ -348,18 +280,18 @@ image-selector {
   font-family: var(--font-family-monospace);
 }
 
-.image-card-overlay .button {
+.image-card-overlay za-button {
   margin-top: auto;
 }
 
 @media (hover: none) and (pointer: coarse) {
-  .image-card-overlay .button {
+  .image-card-overlay za-button {
     transition: 0.3s transform ease-out;
     transition-delay: 0.5s;
     transform: translateY(200%);
   }
 
-  .image-card:hover .image-card-overlay .button {
+  .image-card:hover .image-card-overlay za-button {
     transform: translateY(0);
   }
 }
