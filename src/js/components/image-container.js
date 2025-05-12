@@ -95,9 +95,10 @@ class ImageContainer extends HTMLElement {
       overlay.appendChild(score);
     }
 
-    const playAgainButton = document.createElement("button");
-    playAgainButton.classList.add("button", "button-rounded", "button-padded");
-    playAgainButton.appendChild(document.createTextNode("Try again!"));
+    const playAgainButton = document.createElement("za-button");
+    playAgainButton.setAttribute("padded", true);
+    playAgainButton.setAttribute("rounded", true);
+    playAgainButton.append("Try again!");
 
     playAgainButton.addEventListener("click", () => {
       const playAgainEvent = new CustomEvent("play-again");
@@ -108,15 +109,9 @@ class ImageContainer extends HTMLElement {
 
     const chooseAnotherImageButton = document.createElement("za-button");
     chooseAnotherImageButton.setAttribute("href", "/images");
-
-    chooseAnotherImageButton.classList.add(
-      "button",
-      "button-rounded",
-      "button-padded",
-    );
-    chooseAnotherImageButton.appendChild(
-      document.createTextNode("Try another image"),
-    );
+    chooseAnotherImageButton.setAttribute("padded", true);
+    chooseAnotherImageButton.setAttribute("rounded", true);
+    chooseAnotherImageButton.append("Try another image");
 
     overlay.appendChild(chooseAnotherImageButton);
 
