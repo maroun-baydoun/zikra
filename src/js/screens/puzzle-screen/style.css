@@ -5,7 +5,7 @@ puzzle-screen {
   grid-template-rows: 50px max-content;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
-    "timer .  pause"
+    "timer audio  pause"
     "image image image";
   justify-content: center;
   align-items: center;
@@ -21,7 +21,7 @@ puzzle-screen {
     grid-template-areas:
       ". image timer"
       ". image pause"
-      ". image .";
+      ". image audio";
   }
 }
 
@@ -60,4 +60,22 @@ puzzle-screen[started] game-timer {
 puzzle-screen image-container {
   grid-area: image;
   justify-self: center;
+}
+
+puzzle-screen za-bg-music {
+  grid-area: audio;
+  align-self: center;
+  justify-self: center;
+  display: none;
+}
+
+puzzle-screen[started] za-bg-music {
+  display: initial;
+}
+
+@media screen and (min-width: 1024px) {
+  puzzle-screen za-bg-music {
+    align-self: flex-start;
+    justify-self: flex-end;
+  }
 }

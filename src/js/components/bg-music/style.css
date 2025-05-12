@@ -1,0 +1,21 @@
+audio {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+button {
+  background: none;
+  border: 0;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  width: 35px;
+}
+
+button svg {
+  fill: var(--color-off-white);
+}
+
+button:hover svg {
+  fill: var(--color-white);
+}

@@ -186,6 +186,9 @@ class PuzzleScreen extends HTMLElement {
       this.pause();
     });
 
+    this.bgMusic = document.createElement("za-bg-music");
+    this.append(this.bgMusic);
+
     this.displayImageContainer();
   }
 
