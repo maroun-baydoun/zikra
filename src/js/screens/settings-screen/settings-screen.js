@@ -1,4 +1,4 @@
-import { getSettings, setSettings } from "../../settings/settings-manager.js";
+import { getSettings, setSettings } from "../../settings/settings-manager";
 import { goTo } from "../../location/router";
 
 import "./style.css";
@@ -12,6 +12,13 @@ const template = document.createElement("template");
 template.innerHTML = templateHtml;
 
 class SettingsScreen extends HTMLElement {
+  constructor() {
+    super();
+
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onSaveButtonClicked = this.onSaveButtonClicked.bind(this);
+  }
+
   /**
    * @param {SubmitEvent} event
    */
@@ -27,10 +34,33 @@ class SettingsScreen extends HTMLElement {
     goTo("/");
   }
 
+  onSaveButtonClicked() {
+    const form = this.querySelector("form");
+
+    if (!form) {
+      return;
+    }
+
+    if ("requestSubmit" in HTMLFormElement.prototype) {
+      form.requestSubmit();
+    } else {
+      const submitButton = document.createElement("button");
+      submitButton.type = "submit";
+      submitButton.style.display = "none";
+      form.appendChild(submitButton);
+      submitButton.click();
+      form.removeChild(submitButton);
+    }
+  }
+
   connectedCallback() {
     this.appendChild(template.content.cloneNode(true));
-    const form = this.querySelector("form");
-    form.addEventListener("submit", this.onSubmit);
+
+    this.querySelector("form")?.addEventListener("submit", this.onSubmit);
+    this.querySelector("za-button")?.addEventListener(
+      "click",
+      this.onSaveButtonClicked,
+    );
 
     const { difficulty } = getSettings();
 
@@ -41,6 +71,15 @@ class SettingsScreen extends HTMLElement {
     if (difficultyRadio) {
       difficultyRadio.checked = true;
     }
+  }
+
+  disconnectedCallback() {
+    this.querySelector("form")?.removeEventListener("submit", this.onSubmit);
+
+    this.querySelector("za-button")?.removeEventListener(
+      "click",
+      this.onSaveButtonClicked,
+    );
   }
 }
 

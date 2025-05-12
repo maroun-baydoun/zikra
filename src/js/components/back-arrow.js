@@ -9,10 +9,14 @@ template.innerHTML = `
     za-link {
         display: inline-block;
         width:35px;
-      }
+    }
+   
+    za-link svg {
+        fill: var(--color-off-white);
+    }
 
-    svg {
-        fill: var(--color-black);
+     za-link:hover svg {
+        fill: var(--color-white);
     }
   </style>
   <za-link focusable="true">

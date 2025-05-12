@@ -11,5 +11,9 @@ za-pause-button > button:focus-visible {
 }
 
 za-pause-button > button > svg {
-  fill: var(--color-black);
+  fill: var(--color-off-white);
+}
+
+za-pause-button:hover > button > svg {
+  fill: var(--color-white);
 }

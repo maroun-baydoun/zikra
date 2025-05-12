@@ -4,7 +4,8 @@ za-settings-screen {
   display: flex;
   flex-direction: column;
 
-  color: var(--color-black);
+  background-color: var(--color-black);
+  color: var(--color-off-white);
   padding: var(--spacing);
   gap: var(--spacing);
 }
@@ -74,12 +75,11 @@ za-settings-screen {
   transition: 0.2s all linear;
 
   background-color: var(--color-off-white);
-  border: 5px solid var(--color-black);
 }
 
 .settings-choice-radio:checked {
   background-color: var(--color-black);
-  border: 0;
+  border: 5px solid var(--color-off-white);
 }
 
 .settings-choice-radio:focus-visible {
