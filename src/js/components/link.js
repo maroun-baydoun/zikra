@@ -1,26 +1,17 @@
 import { goTo } from "../location/router.js";
+import styles from "./link.css?raw";
+import {
+  adoptStyleSheet,
+  createAdoptedStyleSheet,
+} from "../dom/adopted-stylesheet.js";
 
 export const LinkTagName = "za-link";
+
+const styleSheet = createAdoptedStyleSheet(styles);
 
 const template = document.createElement("template");
 
 template.innerHTML = `
-  <style>
-    a {
-      text-decoration: none;
-      -webkit-tap-highlight-color: transparent;
-      color: inherit;
-      flex:1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    a:focus-visible, a:focus, a:active {
-      outline: none;
-    }
-
-  </style>
   <a>
     <slot></slot>
   </a>`;
@@ -33,9 +24,12 @@ class Link extends HTMLElement {
   constructor() {
     super();
 
-    this.attachShadow({ mode: "open", delegatesFocus: true }).appendChild(
-      template.content.cloneNode(true),
-    );
+    const shadowRoot = this.attachShadow({
+      mode: "open",
+      delegatesFocus: true,
+    });
+    adoptStyleSheet(shadowRoot, styleSheet);
+    shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {

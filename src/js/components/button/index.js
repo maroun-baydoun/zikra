@@ -1,11 +1,12 @@
 import styles from "./style.css?raw";
+import {
+  adoptStyleSheet,
+  createAdoptedStyleSheet,
+} from "../../dom/adopted-stylesheet.js";
 
-const html = `
-    <style>
-        ${styles}
-    </style>
-    <slot></slot>
-`;
+const styleSheet = createAdoptedStyleSheet(styles);
+
+const html = `<slot></slot>`;
 
 const ButtonTagName = "za-button";
 
@@ -20,8 +21,9 @@ class Button extends HTMLElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot.innerHTML = html;
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    adoptStyleSheet(shadowRoot, styleSheet);
+    shadowRoot.innerHTML = html;
 
     this.onSlotChanged = this.onSlotChanged.bind(this);
     this.onMouseEnter = this.onMouseEnter.bind(this);

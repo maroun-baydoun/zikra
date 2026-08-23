@@ -2,13 +2,16 @@ import mutedSvg from "./muted.svg?raw";
 import unmutedSvg from "./unmuted.svg?raw";
 
 import styles from "./style.css?raw";
+import {
+  adoptStyleSheet,
+  createAdoptedStyleSheet,
+} from "../../dom/adopted-stylesheet.js";
 
 const BgMusicTagName = "za-bg-music";
 
+const styleSheet = createAdoptedStyleSheet(styles);
+
 const html = `
-<style>
-  ${styles}
-</style>
 <audio
   src="/audio/bg-music-s.mp3"
   loop
@@ -21,8 +24,9 @@ const html = `
 class BgMusic extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot.innerHTML = html;
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    adoptStyleSheet(shadowRoot, styleSheet);
+    shadowRoot.innerHTML = html;
 
     this.onButtonClicked = this.onButtonClicked.bind(this);
   }
