@@ -20,6 +20,7 @@ class Timer extends HTMLElement {
 
     this.seconds = 0;
     this.animationHandler = null;
+    this.onAnimationFrame = this.onAnimationFrame.bind(this);
 
     this.format = formatSeconds();
   }
@@ -29,24 +30,26 @@ class Timer extends HTMLElement {
   }
 
   start() {
-    this.lastTime = new Date().getTime();
+    if (this.animationHandler !== null) {
+      return;
+    }
 
-    const timer = () => {
-      this.animationHandler = window.requestAnimationFrame(timer);
+    this.lastTime = performance.now();
+    this.displayTime();
+    this.animationHandler = window.requestAnimationFrame(this.onAnimationFrame);
+  }
 
-      const now = new Date().getTime();
+  onAnimationFrame(now) {
+    const elapsed = now - this.lastTime;
+    const elapsedSeconds = Math.floor(elapsed / 1000);
 
+    if (elapsedSeconds > 0) {
+      this.lastTime += elapsedSeconds * 1000;
+      this.seconds += elapsedSeconds;
       this.displayTime();
+    }
 
-      if (now - this.lastTime >= 1000) {
-        this.lastTime = now;
-        this.seconds++;
-
-        this.displayTime();
-      }
-    };
-
-    timer();
+    this.animationHandler = window.requestAnimationFrame(this.onAnimationFrame);
   }
 
   stop() {
@@ -55,6 +58,7 @@ class Timer extends HTMLElement {
     }
 
     window.cancelAnimationFrame(this.animationHandler);
+    this.animationHandler = null;
   }
 
   reset() {
