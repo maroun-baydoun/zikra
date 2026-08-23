@@ -1,9 +1,9 @@
-import { goTo } from "../location/router.js";
-import styles from "./link.css?raw";
+import { goTo } from "../../location/router.js";
+import styles from "./style.css?raw";
 import {
   adoptStyleSheet,
   createAdoptedStyleSheet,
-} from "../dom/adopted-stylesheet.js";
+} from "../../dom/adopted-stylesheet.js";
 
 export const LinkTagName = "za-link";
 
