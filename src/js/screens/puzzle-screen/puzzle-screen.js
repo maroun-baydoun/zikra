@@ -2,7 +2,7 @@ import { Mediaq } from "mediaq";
 import { addImageContainer } from "../../components/image-container.js";
 import { addTimer, formatSeconds } from "../../components/timer";
 import { addPauseButton } from "../../components/pause-button";
-import { addLoader } from "../../components/loader.js";
+import { addLoader } from "../../components/loader";
 import { setImageScore, getImageScore } from "../../score/score-manager.js";
 import { showMask } from "../../mask.js";
 
