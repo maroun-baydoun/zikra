@@ -1,35 +1,35 @@
-import arrowLeftSvg from "../../icon/arrow-left.svg?raw";
+import arrowLeftSvg from "../../../icon/arrow-left.svg?raw";
+import styles from "./style.css?raw";
+import {
+  adoptStyleSheet,
+  createAdoptedStyleSheet,
+} from "../../dom/adopted-stylesheet.js";
 
 export const BackArrowTagName = "za-back-arrow";
+
+const styleSheet = createAdoptedStyleSheet(styles);
+const icon = arrowLeftSvg.replace("<svg ", '<svg fill="currentColor" ');
 
 const template = document.createElement("template");
 
 template.innerHTML = `
-  <style>
-    za-link {
-        display: inline-block;
-        width:35px;
-    }
-   
-    za-link svg {
-        fill: var(--color-off-white);
-    }
-
-     za-link:hover svg {
-        fill: var(--color-white);
-    }
-  </style>
   <za-link focusable="true">
-  ${arrowLeftSvg}
+    ${icon}
   </za-link>`;
 
 class BackArrow extends HTMLElement {
+  constructor() {
+    super();
+
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    adoptStyleSheet(shadowRoot, styleSheet);
+    shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
   connectedCallback() {
     const href = this.getAttribute("href");
+    const link = this.shadowRoot.querySelector("za-link");
 
-    this.appendChild(template.content.cloneNode(true));
-
-    const link = this.querySelector("za-link");
     link.setAttribute("href", href);
   }
 }

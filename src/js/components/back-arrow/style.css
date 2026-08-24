@@ -1,0 +1,18 @@
+:host {
+  display: inline-block;
+}
+
+za-link {
+  display: inline-block;
+}
+
+za-link::part(link) {
+  display: inline-flex;
+  width: 35px;
+  height: 35px;
+  color: var(--color-off-white);
+}
+
+za-link:hover::part(link) {
+  color: var(--color-white);
+}

@@ -12,7 +12,7 @@ const styleSheet = createAdoptedStyleSheet(styles);
 const template = document.createElement("template");
 
 template.innerHTML = `
-  <a>
+  <a part="link">
     <slot></slot>
   </a>`;
 
