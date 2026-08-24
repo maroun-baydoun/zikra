@@ -375,21 +375,6 @@ image-piece button {
   background-position: var(--image-position-x) var(--image-position-y);
 }
 
-game-timer {
-  user-select: none;
-
-  font-family: var(--font-family-monospace);
-  font-size: var(--font-size-l);
-  background-color: var(--color-black);
-  color: var(--color-off-white);
-  border-radius: var(--border-radius);
-  padding: calc(var(--spacing) * 0.2) calc(var(--spacing) * 0.3);
-}
-
-game-timer:empty {
-  padding: 0;
-}
-
 game-loader {
   position: absolute;
   opacity: 0;

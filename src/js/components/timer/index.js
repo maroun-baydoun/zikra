@@ -1,3 +1,11 @@
+import styles from "./style.css?raw";
+import {
+  adoptStyleSheet,
+  createAdoptedStyleSheet,
+} from "../../dom/adopted-stylesheet.js";
+
+const styleSheet = createAdoptedStyleSheet(styles);
+
 export const formatSeconds = () => {
   const dateTimeFormat = new Intl.DateTimeFormat("default", {
     minute: "numeric",
@@ -21,8 +29,10 @@ class Timer extends HTMLElement {
     this.seconds = 0;
     this.animationHandler = null;
     this.onAnimationFrame = this.onAnimationFrame.bind(this);
-
     this.format = formatSeconds();
+
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    adoptStyleSheet(shadowRoot, styleSheet);
   }
 
   disconnectedCallback() {
@@ -69,7 +79,7 @@ class Timer extends HTMLElement {
   }
 
   displayTime() {
-    this.innerHTML = this.format(this.seconds);
+    this.shadowRoot.textContent = this.format(this.seconds);
   }
 }
 

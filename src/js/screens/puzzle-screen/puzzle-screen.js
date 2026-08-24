@@ -1,6 +1,6 @@
 import { Mediaq } from "mediaq";
 import { addImageContainer } from "../../components/image-container.js";
-import { addTimer, formatSeconds } from "../../components/timer.js";
+import { addTimer, formatSeconds } from "../../components/timer";
 import { addPauseButton } from "../../components/pause-button";
 import { addLoader } from "../../components/loader.js";
 import { setImageScore, getImageScore } from "../../score/score-manager.js";
