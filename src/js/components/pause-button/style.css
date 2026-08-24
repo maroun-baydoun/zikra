@@ -1,19 +1,19 @@
-za-pause-button > button {
+button {
   background: none;
   border: 0;
   cursor: pointer;
   width: 35px;
 }
 
-za-pause-button > button:focus-visible {
+button:focus-visible {
   outline: 2px solid var(--color-outline);
   outline-offset: 2px;
 }
 
-za-pause-button > button > svg {
+button > svg {
   fill: var(--color-off-white);
 }
 
-za-pause-button:hover > button > svg {
+:host(:hover) button > svg {
   fill: var(--color-white);
 }

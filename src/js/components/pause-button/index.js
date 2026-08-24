@@ -1,7 +1,13 @@
 import pauseSvg from "../../../icon/pause.svg?raw";
-import "./style.css";
+import styles from "./style.css?raw";
+import {
+  adoptStyleSheet,
+  createAdoptedStyleSheet,
+} from "../../dom/adopted-stylesheet.js";
 
 export const PauseButtonTagName = "za-pause-button";
+
+const styleSheet = createAdoptedStyleSheet(styles);
 
 const template = document.createElement("template");
 
@@ -11,8 +17,12 @@ ${pauseSvg}
 </button>`;
 
 class PauseButton extends HTMLElement {
-  connectedCallback() {
-    this.appendChild(template.content.cloneNode(true));
+  constructor() {
+    super();
+
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    adoptStyleSheet(shadowRoot, styleSheet);
+    shadowRoot.appendChild(template.content.cloneNode(true));
   }
 }
 
