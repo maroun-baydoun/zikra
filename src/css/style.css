@@ -125,14 +125,14 @@ dialog:focus-visible {
 }
 
 dialog[open] {
-  animation: mask-fade-in 200ms ease-out 0s 1 normal forwards;
+  animation: dialog-fade-in 200ms ease-out 0s 1 normal forwards;
 }
 
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-@keyframes mask-fade-in {
+@keyframes dialog-fade-in {
   from {
     opacity: 0;
   }
@@ -142,7 +142,7 @@ dialog::backdrop {
   }
 }
 
-.mask-text {
+.dialog-text {
   user-select: none;
 
   color: var(--color-off-white);

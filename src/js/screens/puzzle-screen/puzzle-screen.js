@@ -4,7 +4,7 @@ import { addTimer, formatSeconds } from "../../components/timer";
 import { addPauseButton } from "../../components/pause-button";
 import { addLoader } from "../../components/loader";
 import { setImageScore, getImageScore } from "../../score/score-manager.js";
-import { showMask } from "../../mask.js";
+import { showDialog } from "../../dialog.js";
 
 import "./style.css";
 
@@ -76,25 +76,47 @@ class PuzzleScreen extends HTMLElement {
     return (event.returnValue = "");
   }
 
+  closeActiveDialog() {
+    const dialog = this.activeDialog;
+
+    if (!dialog) {
+      return;
+    }
+
+    this.activeDialog = null;
+
+    if (dialog.open) {
+      dialog.close();
+    } else {
+      dialog.remove();
+    }
+  }
+
   onMediaQueryMatchUpdate({ name, matches }) {
-    if (name === "landscape") {
-      if (matches) {
-        const turn = document.createElement("div");
-        turn.classList.add("mask-text");
-        turn.appendChild(
-          document.createTextNode("You can only play in portrait"),
-        );
-        try {
-          const dismiss = showMask([turn]);
-          this.dismissMask = dismiss;
-          this.gameTimer.stop();
-        } catch {}
-      } else {
-        if (this.dismissMask) {
-          this.dismissMask();
-          this.gameTimer.start();
-        }
+    if (name !== "landscape") {
+      return;
+    }
+
+    if (matches) {
+      if (this.activeDialog) {
+        return;
       }
+
+      const turn = document.createElement("div");
+      turn.classList.add("dialog-text");
+      turn.appendChild(
+        document.createTextNode("You can only play in portrait"),
+      );
+
+      this.activeDialog = showDialog([turn], { dismissible: false });
+      this.gameTimer.stop();
+      return;
+    }
+
+    this.closeActiveDialog();
+
+    if (this.hasAttribute("started")) {
+      this.gameTimer.start();
     }
   }
 
@@ -105,13 +127,15 @@ class PuzzleScreen extends HTMLElement {
   }
 
   pause() {
-    if (this.hasAttribute("solved")) {
+    if (this.hasAttribute("solved") || this.activeDialog) {
       return;
     }
 
     const paused = document.createElement("div");
-    paused.classList.add("mask-text");
+    paused.classList.add("dialog-text");
     paused.appendChild(document.createTextNode("Paused"));
+
+    let dialog;
 
     const resumeButton = document.createElement("za-button");
     resumeButton.setAttribute("padded", true);
@@ -119,10 +143,7 @@ class PuzzleScreen extends HTMLElement {
     resumeButton.append("Continue");
 
     resumeButton.addEventListener("click", () => {
-      if (this.dismissMask) {
-        this.dismissMask();
-      }
-      this.gameTimer.start();
+      dialog.close("continue");
     });
 
     const playAgainButton = document.createElement("za-button");
@@ -131,10 +152,7 @@ class PuzzleScreen extends HTMLElement {
     playAgainButton.append("Try again!");
 
     playAgainButton.addEventListener("click", () => {
-      if (this.dismissMask) {
-        this.dismissMask();
-      }
-      this.onPlayAgain();
+      dialog.close("play-again");
     });
 
     const giveUpButton = document.createElement("za-button");
@@ -143,17 +161,27 @@ class PuzzleScreen extends HTMLElement {
     giveUpButton.setAttribute("rounded", true);
     giveUpButton.append("Give up");
 
-    try {
-      const dismiss = showMask([
-        paused,
-        resumeButton,
-        playAgainButton,
-        giveUpButton,
-      ]);
-      this.dismissMask = dismiss;
+    dialog = showDialog([paused, resumeButton, playAgainButton, giveUpButton]);
+    this.activeDialog = dialog;
 
-      this.gameTimer.stop();
-    } catch {}
+    dialog.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      dialog.close("continue");
+    });
+
+    dialog.addEventListener("close", () => {
+      if (this.activeDialog === dialog) {
+        this.activeDialog = null;
+      }
+
+      if (dialog.returnValue === "continue") {
+        this.gameTimer.start();
+      } else if (dialog.returnValue === "play-again") {
+        this.onPlayAgain();
+      }
+    });
+
+    this.gameTimer.stop();
   }
 
   connectedCallback() {
@@ -193,6 +221,7 @@ class PuzzleScreen extends HTMLElement {
   }
 
   disconnectedCallback() {
+    this.closeActiveDialog();
     this.mediaq?.stop();
     window.removeEventListener("beforeunload", this.onBeforeUnload);
     window.document.removeEventListener(
