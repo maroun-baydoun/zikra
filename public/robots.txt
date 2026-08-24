@@ -1,4 +1,6 @@
 User-Agent: *
 Allow: /
-Disallow: /images/
+Disallow: /images
 Disallow: /image/
+
+Sitemap: https://zikra-game.netlify.app/sitemap.xml
