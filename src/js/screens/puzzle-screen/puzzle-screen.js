@@ -104,9 +104,7 @@ class PuzzleScreen extends HTMLElement {
 
       const turn = document.createElement("div");
       turn.classList.add("dialog-text");
-      turn.appendChild(
-        document.createTextNode("You can only play in portrait"),
-      );
+      turn.append("You can only play in portrait");
 
       this.activeDialog = showDialog([turn], { dismissible: false });
       this.gameTimer.stop();
@@ -133,7 +131,7 @@ class PuzzleScreen extends HTMLElement {
 
     const paused = document.createElement("div");
     paused.classList.add("dialog-text");
-    paused.appendChild(document.createTextNode("Paused"));
+    paused.append("Paused");
 
     let dialog;
 
