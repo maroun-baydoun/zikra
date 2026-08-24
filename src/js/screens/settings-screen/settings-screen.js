@@ -1,19 +1,26 @@
 import { getSettings, setSettings } from "../../settings/settings-manager";
 import { goTo } from "../../location/router";
-
-import "./style.css";
-
 import templateHtml from "./template.html?raw";
+import styles from "./style.css?raw";
+import {
+  adoptStyleSheet,
+  createAdoptedStyleSheet,
+} from "../../dom/adopted-stylesheet.js";
 
 export const SettingsScreenTagName = "za-settings-screen";
 
 const template = document.createElement("template");
 
 template.innerHTML = templateHtml;
+const styleSheet = createAdoptedStyleSheet(styles);
 
 class SettingsScreen extends HTMLElement {
   constructor() {
     super();
+
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    adoptStyleSheet(shadowRoot, styleSheet);
+    shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onSaveButtonClicked = this.onSaveButtonClicked.bind(this);
@@ -35,7 +42,7 @@ class SettingsScreen extends HTMLElement {
   }
 
   onSaveButtonClicked() {
-    const form = this.querySelector("form");
+    const form = this.shadowRoot.querySelector("form");
 
     if (!form) {
       return;
@@ -54,18 +61,16 @@ class SettingsScreen extends HTMLElement {
   }
 
   connectedCallback() {
-    this.appendChild(template.content.cloneNode(true));
+    const form = this.shadowRoot.querySelector("form");
+    const saveButton = this.shadowRoot.querySelector("za-button");
 
-    this.querySelector("form")?.addEventListener("submit", this.onSubmit);
-    this.querySelector("za-button")?.addEventListener(
-      "click",
-      this.onSaveButtonClicked,
-    );
+    form?.addEventListener("submit", this.onSubmit);
+    saveButton?.addEventListener("click", this.onSaveButtonClicked);
 
     const { difficulty } = getSettings();
 
-    const difficultyRadio = document.getElementById(
-      `settings-difficulty-${difficulty}`,
+    const difficultyRadio = this.shadowRoot.querySelector(
+      `#settings-difficulty-${difficulty}`,
     );
 
     if (difficultyRadio) {
@@ -74,12 +79,11 @@ class SettingsScreen extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.querySelector("form")?.removeEventListener("submit", this.onSubmit);
+    const form = this.shadowRoot.querySelector("form");
+    const saveButton = this.shadowRoot.querySelector("za-button");
 
-    this.querySelector("za-button")?.removeEventListener(
-      "click",
-      this.onSaveButtonClicked,
-    );
+    form?.removeEventListener("submit", this.onSubmit);
+    saveButton?.removeEventListener("click", this.onSaveButtonClicked);
   }
 }
 
