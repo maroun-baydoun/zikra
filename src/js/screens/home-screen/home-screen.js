@@ -1,16 +1,24 @@
 import templateHtml from "./template.html?raw";
-
-import "./style.css";
+import styles from "./style.css?raw";
+import {
+  adoptStyleSheet,
+  createAdoptedStyleSheet,
+} from "../../dom/adopted-stylesheet.js";
 
 const HomeScreenTagName = "za-home-screen";
 
 const template = document.createElement("template");
 
 template.innerHTML = templateHtml;
+const styleSheet = createAdoptedStyleSheet(styles);
 
 class HomeScreen extends HTMLElement {
-  connectedCallback() {
-    this.appendChild(template.content.cloneNode(true));
+  constructor() {
+    super();
+
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    adoptStyleSheet(shadowRoot, styleSheet);
+    shadowRoot.appendChild(template.content.cloneNode(true));
   }
 }
 

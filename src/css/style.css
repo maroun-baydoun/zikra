@@ -80,33 +80,6 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
-  padding: calc(var(--spacing) * 3) 0;
-}
-
-header h1 {
-  flex: 1;
-  letter-spacing: 0.5rem;
-  text-transform: uppercase;
-  text-align: center;
-
-  max-width: var(--max-width);
-  font-size: calc(var(--font-size-xl) * 3);
-}
-
-header h2 {
-  flex: 1;
-  white-space: pre;
-
-  font-size: var(--font-size-l);
-}
-
 dialog {
   display: flex;
   flex-direction: column;
