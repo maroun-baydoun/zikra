@@ -14,6 +14,7 @@ import { registerImageContainer } from "./src/js/components/image-container";
 
 import { registerHomeScreen } from "./src/js/screens/home-screen/home-screen";
 import { registerSettingsScreen } from "./src/js/screens/settings-screen/settings-screen";
+import { registerAboutScreen } from "./src/js/screens/about-screen/about-screen";
 import { registerPuzzleScreen } from "./src/js/screens/puzzle-screen/puzzle-screen";
 
 registerButton();
@@ -29,4 +30,5 @@ registerImageContainer();
 
 registerHomeScreen();
 registerSettingsScreen();
+registerAboutScreen();
 registerPuzzleScreen();

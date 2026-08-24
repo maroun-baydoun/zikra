@@ -3,6 +3,7 @@ import { setTitle } from "../title";
 
 import { addHomeScreen } from "../screens/home-screen/home-screen.js";
 import { addSettingsScreen } from "../screens/settings-screen/settings-screen.js";
+import { addAboutScreen } from "../screens/about-screen/about-screen.js";
 import { displayImageSelector } from "../components/image-selector.js";
 import { addPuzzleScreen } from "../screens/puzzle-screen/puzzle-screen";
 
@@ -11,6 +12,7 @@ import metada from "../../img/metadata.json";
 export const ROUTES = [
   { name: "home", path: "/" },
   { name: "settings", path: "/settings" },
+  { name: "about", path: "/about" },
   { name: "images", path: "/images" },
   {
     name: "image",
@@ -30,6 +32,9 @@ export const goTo = configureRouter(ROUTES)(
     } else if (routeName === "settings") {
       setTitle("Settings");
       addSettingsScreen(body);
+    } else if (routeName === "about") {
+      setTitle("About Zikra");
+      addAboutScreen(body);
     } else if (routeName === "images") {
       setTitle("Select an image");
       const container = addContainer(body);

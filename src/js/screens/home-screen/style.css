@@ -84,12 +84,3 @@
 
   gap: var(--spacing);
 }
-
-:host footer {
-  padding: calc(var(--spacing) * 2);
-  text-align: center;
-}
-
-:host footer a {
-  color: var(--color-off-white);
-}
