@@ -15,6 +15,7 @@ import { registerImageContainer } from "./src/js/components/image-container";
 import { registerHomeScreen } from "./src/js/screens/home-screen/home-screen";
 import { registerSettingsScreen } from "./src/js/screens/settings-screen/settings-screen";
 import { registerAboutScreen } from "./src/js/screens/about-screen/about-screen";
+import { registerNotFoundScreen } from "./src/js/screens/not-found-screen/not-found-screen";
 import { registerPuzzleScreen } from "./src/js/screens/puzzle-screen/puzzle-screen";
 
 registerButton();
@@ -31,4 +32,5 @@ registerImageContainer();
 registerHomeScreen();
 registerSettingsScreen();
 registerAboutScreen();
+registerNotFoundScreen();
 registerPuzzleScreen();

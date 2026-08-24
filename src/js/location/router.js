@@ -1,9 +1,11 @@
 import { configureRouter } from "./location.js";
 import { setTitle } from "../title";
+import { setRobots } from "../robots";
 
 import { addHomeScreen } from "../screens/home-screen/home-screen.js";
 import { addSettingsScreen } from "../screens/settings-screen/settings-screen.js";
 import { addAboutScreen } from "../screens/about-screen/about-screen.js";
+import { addNotFoundScreen } from "../screens/not-found-screen/not-found-screen.js";
 import { displayImageSelector } from "../components/image-selector.js";
 import { addPuzzleScreen } from "../screens/puzzle-screen/puzzle-screen";
 
@@ -25,6 +27,7 @@ export const goTo = configureRouter(ROUTES)(
     const body = document.querySelector("body");
 
     clearContainer(body);
+    setRobots();
 
     if (routeName === "home") {
       setTitle("Zikra - Putting the pieces back together", false);
@@ -52,7 +55,14 @@ export const goTo = configureRouter(ROUTES)(
       addPuzzleScreen(container, { imageId });
     }
   },
-  () => {},
+  () => {
+    const body = document.querySelector("body");
+
+    clearContainer(body);
+    setTitle("Page not found");
+    setRobots("noindex");
+    addNotFoundScreen(body);
+  },
 );
 
 const clearContainer = (container) => {
